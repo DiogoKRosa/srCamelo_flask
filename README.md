@@ -4,18 +4,15 @@
 Este projeto envolve o desenvolvimento de uma aplicação baseada em geolocalização destinada a auxiliar os vendedores ambulantes, orientando os usuarios. A aplicação foi desenvolvida usando o Flask, um framework web em Python, juntamente com o banco de dados do MongoDB.
 
 ### Tecnologias Utilizadas
-* [Python]
-* [Flask]
-* [Jinja]
-* [MongoDB]
-* [Javascript]
-* [HTML]
+* [Python](https://www.python.org/)
+* [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+* [Jinja](https://jinja.palletsprojects.com/en/3.1.x/)
+* [MongoDB](https://www.mongodb.com/)
+* [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+* [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
 
 ### Ferramentas de desenvolvimento
-<p display="inline-block">
-    <img width="48" src="https://icons8.com/icon/0OQR1FYCuA9f/visual-studio-code-2019">
-    <img width="48" src="https://icons8.com/icon/3tC9EQumUAuq/github">
-</p>
+* [Visual Studio Code](https://code.visualstudio.com/)
 
 ### Dependências necessárias
 
