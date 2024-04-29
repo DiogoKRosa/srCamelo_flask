@@ -4,8 +4,8 @@
     <div class="content">
         <div class="select-cadastro">
             <img src="{{url_for('static', filename='images/logo_orange3.png')}}">
-            <button type="button">Cliente</button>
-            <button type="button">Vendedor</button>
+            <button type="button" onclick="location.href='{{url_for('cadastro_consumidor')}}'">Cliente</button>
+            <button type="button" onclick="location.href='{{url_for('cadastro_vendedor')}}'">Vendedor</button>
             <a href="{{url_for('index')}}">Já possuo uma conta</a>
         </div>
     </div>
