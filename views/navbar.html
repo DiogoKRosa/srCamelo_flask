@@ -10,8 +10,12 @@
 <body>
     <div class="wrapper">
         <div class="navbar">
+            <div class="nav-esquerda">
+                <img class="voltar" src="{{url_for('static', filename='images/voltar.svg')}}" onclick="location.href='{{url_for('index')}}'">
+            </div>
+
             <div class="radius"></div>
-        </div>
+        </div>  
         {% block content %}
     
         {% endblock content %}
