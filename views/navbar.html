@@ -9,8 +9,11 @@
 </head>
 <body>
     <div class="wrapper">
+        <div class="navbar">
+            <div class="radius"></div>
+        </div>
         {% block content %}
-        
+    
         {% endblock content %}
     </div>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>

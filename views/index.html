@@ -1,16 +1,14 @@
 {% extends 'import.html' %}
 {% block content %}
-<div class="wrapper">
-    <div class="content">
-        <div class="div-login">
-            <form action="" class="form-login">
-                <img src="{{url_for('static', filename='images/logo_orange3.png')}}">
-                <input type="text" placeholder="Email" id="email" name="email">
-                <input type="password" placeholder="Senha" id="senha" name="senha">
-                <button type="button">Entrar</button>
-                <a href="{{url_for('cadastro')}}">Não possuo uma conta</a>
-            </form>
-        </div>
+<div class="content">
+    <div class="div-login">
+        <form action="" class="form-login">
+            <img src="{{url_for('static', filename='images/logo_orange3.png')}}">
+            <input type="text" placeholder="Email" id="email" name="email">
+            <input type="password" placeholder="Senha" id="senha" name="senha">
+            <button type="button">Entrar</button>
+            <a href="{{url_for('cadastro')}}">Não possuo uma conta</a>
+        </form>
     </div>
 </div>
 {% endblock content %}
