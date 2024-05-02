@@ -27,16 +27,18 @@
     </div>
 </div>
 <script>
-    function formataCpf(){
+    function formataCpf(e){
         var input = document.querySelector('#cpf')
         value = input.value
-        if(isNaN(value[value.length-1])){ // impede entrar outro caractere que não seja número
-            input.value = value.substring(0, value.length-1);
-            return;
+        if(isNaN(e.data)){
+            input.value = value.substring(0, value.length-1)
+            return
         }
         input.setAttribute("maxlength", "14");
-        if (value.length == 3 || value.length == 7) input.value += ".";
-        if (value.length == 11) input.value += "-";
+        if(value.length == 3 || value.length == 7) input.value += "."
+        if(value.length == 11) input.value += "-"
+        limit = [3,7,11]
+        if(limit.includes(value.length) && e.inputType == 'deleteContentBackward') input.value = value.substring(0, value.length-1)
     }
 
     function formataTel(e){
