@@ -10,7 +10,7 @@ def init_app(app):
     def cadastro():
         return render_template('cadastro.html')
     
-    @app.route('/cadastro/consumidor')
+    @app.route('/cadastro/consumidor', methods=['GET', 'POST'])
     def cadastro_consumidor():
         return render_template('cadastro_consumidor.html')
     

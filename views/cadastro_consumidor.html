@@ -3,7 +3,7 @@
 
 <div class="content">
     <div class="cadastro-consumidor">
-        <form action="" class="form-cadConsumidor">
+        <form action="{{url_for('cadastro_consumidor')}}" method="POST" class="form-cadConsumidor" name="form-cadConsumidor" id="cadConsumidor">
             <div>
                 <h2>Cadastro</h2>
                 <img src="{{url_for('static', filename='images/cad_cons_icon.svg')}}">
@@ -14,14 +14,14 @@
                 <input type="email" placeholder="E-mail" name="email" id="email" required>
                 <input type="text" placeholder="Telefone" name="telefone" id="telefone" oninput="formataTel(event)" required>
                 <input type="password" placeholder="Senha" name="senha" id="senha" required>
-                <input type="password" placeholder="Confirmar Senha" required>
+                <input type="password" placeholder="Confirmar Senha" id="cSenha" required>
                 <div>
                     <input type="text" placeholder="País" name="pais" id="pais" required>
-                    <input type="text" placeholder="UF" name="uf" id="uf" required>
+                    <input type="text" placeholder="UF" name="uf" id="uf" maxlength="2" oninput="this.value = this.value.toUpperCase()" required>
                 </div>
                 <input type="text" placeholder="Cidade" name="cidade" id="cidade" required>
             </div>
-            <button type="button">Cadastrar-se</button>
+            <button type="button" onclick="enviarForm()">Cadastrar-se</button>
             <a href="{{url_for('index')}}">Já possuo uma conta</a>
         </form>
     </div>
@@ -54,6 +54,40 @@
         if(value.length == 9) input.value += "-"
         limit = [1,3,9]
         if(limit.includes(value.length) && e.inputType == 'deleteContentBackward') input.value = value.substring(0, value.length-1)
+    }
+
+    function enviarForm(){
+        var form = document.querySelector('#cadConsumidor')
+        var cpf = document.querySelector('#cpf')
+        var senha = document.querySelector('#senha')
+        var cSenha = document.querySelector('#cSenha')
+
+        if(validarCpf(cpf.value)){
+            if(validarSenha(senha.value, cSenha.value)){
+                form.submit()
+            }else{
+                alert("Senhas Divergentes")
+            }
+        }else{
+            alert("CPF Inválido")
+        }
+    
+    }
+
+    function validarCpf(e){
+        return true
+    }
+
+    function validarSenha(senha, cSenha){
+        if(senha == cSenha){
+            return true
+        }else{
+            return false
+        }
+    }
+
+    function conferirNulo(){
+        
     }
 </script>
 {% endblock content %}
