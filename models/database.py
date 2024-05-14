@@ -29,4 +29,8 @@ class Usuario():
             'cidade': self.cidade,
             'imagem': self.imagem
         })
+        
+    @staticmethod
+    def trazerLogin(email):
+        return mongo.db.usuarios.find_one({'email': email})
     

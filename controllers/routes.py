@@ -13,6 +13,11 @@ def init_app(app):
     @app.route('/cadastro/consumidor', methods=['GET', 'POST'])
     def cadastro_consumidor():
         if request.method == 'POST':
+            conferirEmail = Usuario.trazerLogin(request.form['email'])
+            
+            if(conferirEmail):
+                return redirect(url_for('cadastro_consumidor'))
+            
             novoUsu = Usuario(
                 tipo = 'Cliente',
                 nome = request.form['nome'],
@@ -26,7 +31,7 @@ def init_app(app):
                 imagem = ''
             )
             novoUsu.save()
-            return redirect(url_for('index.html'))
+            return redirect(url_for('index'))
 
         return render_template('cadastro_consumidor.html')
     
