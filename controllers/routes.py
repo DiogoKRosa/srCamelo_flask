@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 
 def init_app(app):
 
@@ -12,6 +12,15 @@ def init_app(app):
     
     @app.route('/cadastro/consumidor', methods=['GET', 'POST'])
     def cadastro_consumidor():
+        if request.method == 'POST':
+            print(request.form['nome'])
+            print(request.form['cpf'])
+            print(request.form['email'])
+            print(request.form['telefone'])
+            print(request.form['senha'])
+            print(request.form['pais'])
+            print(request.form['uf'])
+            print(request.form['cidade'])
         return render_template('cadastro_consumidor.html')
     
     @app.route('/cadastro/vendedor')
