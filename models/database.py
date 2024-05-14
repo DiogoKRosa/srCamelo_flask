@@ -4,7 +4,7 @@ from bson import ObjectId
 mongo = PyMongo()
 
 class Usuario():
-    def __init__(self, tipo, nome, cpf, email, telefone, senha, pais, uf, cidade):
+    def __init__(self, tipo, nome, cpf, email, telefone, senha, pais, uf, cidade, imagem):
         self.tipo = tipo
         self.nome = nome
         self.cpf = cpf
@@ -14,6 +14,7 @@ class Usuario():
         self.pais = pais
         self.uf = uf
         self.cidade = cidade
+        self.imagem = imagem
     
     def save(self):
         mongo.db.usuarios.insert_one({
@@ -25,5 +26,7 @@ class Usuario():
             'senha': self.senha,
             'pais': self.pais,
             'uf': self.uf,
-            'cidade': self.cidade
+            'cidade': self.cidade,
+            'imagem': self.imagem
         })
+    

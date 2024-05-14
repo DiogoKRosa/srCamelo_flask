@@ -7,7 +7,7 @@ from models.database import mongo, Usuario
 app = Flask(__name__, template_folder='views')
 routes.init_app(app)
 
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/games'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/srcamelo'
 
 # Se for executado diretamente pelo interpretador
 if __name__ == '__main__':
@@ -15,8 +15,15 @@ if __name__ == '__main__':
     with app.app_context():
         if 'usuarios' not in mongo.db.list_collection_names():
             usuario = Usuario(
-                tipo = '',
-                nome = ''
+                nome = '',
+                cpf = '',
+                email = '',
+                telefone = '',
+                senha = '',
+                pais = '',
+                uf = '',
+                cidade = '',
+                imagem = '',
             )
             usuario.save()
 
