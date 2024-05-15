@@ -40,6 +40,28 @@ def init_app(app):
 
         return render_template('cadastro_consumidor.html')
     
-    @app.route('/cadastro/vendedor')
+    @app.route('/cadastro/vendedor', methods=['GET', 'POST'])
     def cadastro_vendedor():
+        if request.method == 'POST':
+            conferirEmail = Usuario.trazerLogin(request.form['email'])
+            
+            if(conferirEmail):
+                flash("Já existe um cadastro com esse email")
+                return redirect(url_for('cadastro_vendedor'))
+            
+            hashed_password = generate_password_hash(request.form['senha'], method='scrypt')
+            novoUsu = Usuario(
+                tipo = 'Vendedor',
+                nome = request.form['nome'],
+                cpf = request.form['cpf'],
+                email = request.form['email'],
+                telefone = request.form['telefone'],
+                senha = hashed_password,
+                pais = request.form['pais'],
+                uf = request.form['uf'],
+                cidade = request.form['cidade'],
+                imagem = ''
+            )
+            novoUsu.save()
+            return redirect(url_for('index'))
         return render_template('cadastro_vendedor.html')
