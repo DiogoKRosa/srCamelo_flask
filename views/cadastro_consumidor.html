@@ -77,11 +77,6 @@
         }
         if(!validarCpf(cpf.value)){
             return alert("CPF Inválido")
-            /* if(validarSenha(senha.value, cSenha.value)){
-                form.submit()
-            }else{
-                alert("Senhas Divergentes")
-            } */
         }
         if(!validarSenha(senha.value, cSenha.value)){
             return alert("Senhas divergentes")
@@ -102,9 +97,20 @@
     }
 
     function conferirNulo(nome, cpf, email, telefone, senha, cSenha, pais, uf, cidade){
-        if(nome!='' || cpf!='' || email!='' || telefone!='' || senha!='' || cSenha!='' || pais!='' || uf!='' || cidade!=''){
+        /* console.log(nome, nome.length)
+        console.log(cpf, cpf.length)
+        console.log(email, email.length)
+        console.log(telefone, telefone.length)
+        console.log(senha, senha.length)
+        console.log(cSenha, cSenha.length)
+        console.log(pais, pais.length)
+        console.log(uf, uf.length)
+        console.log(cidade, cidade.length) */
+        if(nome.length > 0 && cpf.length > 0 && email.length > 0 && telefone.length > 0 && senha.length > 0 && cSenha.length > 0 && pais.length > 0 && uf.length > 0 && cidade.length > 0){
+            console.log("Verdadeiro")
             return true
         }
+        console.log("Falso")
         return false
     }
 </script>
