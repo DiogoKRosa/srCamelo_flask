@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash, session
 from models.database import Usuario
 from markupsafe import Markup
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,6 +19,7 @@ def init_app(app):
             conferirEmail = Usuario.trazerLogin(request.form['email'])
             
             if(conferirEmail):
+                flash("Já existe um cadastro com esse email")
                 return redirect(url_for('cadastro_consumidor'))
             
             hashed_password = generate_password_hash(request.form['senha'], method='scrypt')
