@@ -1,5 +1,6 @@
 from flask_pymongo import PyMongo
 from bson import ObjectId
+from flask import jsonify
 
 mongo = PyMongo()
 
@@ -32,5 +33,5 @@ class Usuario():
         
     @staticmethod
     def trazerLogin(email):
-        return mongo.db.usuarios.find_one({'email': email})
-    
+        select = mongo.db.usuarios.find_one({'email': email})
+        return select
