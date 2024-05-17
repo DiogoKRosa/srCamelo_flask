@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash, session
-from models.database import Usuario
+from models.database import Usuario, Produto
 from markupsafe import Markup
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import json_util
@@ -30,8 +30,12 @@ def init_app(app):
                     print('inicio_cliente')
                     return redirect(url_for('inicio_cliente'))
                 elif(user['tipo'] == 'Vendedor'):
-                    print('inicio_vendedor')
-                    return redirect(url_for('inicio_vendedor'))
+                    if Produto.selectByVendedor(session['user_id']):
+                        print('primeiro_acesso')
+                        return redirect(url_for('primeiro_acesso'))
+                    else:
+                        print('inicio_vendedor')
+                        return redirect(url_for('inicio_vendedor'))
             else:
                 flash("Usuário ou senha incorretos")
         return render_template('index.html')
