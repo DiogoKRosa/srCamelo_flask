@@ -1,7 +1,7 @@
 #Importando as denpendências que serão utilizadas
 from flask import Flask, render_template
 from controllers import routes
-from models.database import mongo, Usuario
+from models.database import mongo, Usuario, Produto
 
 # Carregando o Flask na variável app
 app = Flask(__name__, template_folder='views')
@@ -33,8 +33,20 @@ if __name__ == '__main__':
                 pais = '',
                 uf = '',
                 cidade = '',
-                imagem = '',
+                imagem_perfil = '',
+                nome_fantasia = '',
+                imagem_loja = ''
             )
             usuario.save()
+
+        if 'produtos' not in mongo.db.list_collection_names():
+            produto = Produto(
+                id_vendedor='',
+                nome='',
+                preco=0,
+                descricao='',
+                categoria=''
+            )
+            produto.save()
 
     app.run(host='localhost', port=5000, debug=True)
