@@ -94,7 +94,7 @@ a:hover{
     transition: 200ms;
 }
 
-h2{
+h2, h4{
     color: #FF6700;
     font-weight: 300;
 }
@@ -206,4 +206,44 @@ h2{
 .banner-template>button{
     margin-top: -25px;
     box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.25);
+}
+.check_formaPag{
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 27px;
+    column-gap: 44px;
+}
+.option_formaPag{
+    display: flex;
+    align-items: center;
+}
+.option_formaPag>input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.option_formaPag>.checkmark{
+    height: 70px;
+    width: 70px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.option_formaPag:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+.option_formaPag input:checked ~ .checkmark {
+    img{
+        fill: #ffffff
+    };
+    background-color: #5CAC0E;
+  }
+.option_formaPag>label{
+    margin-left: 10px;
 }
