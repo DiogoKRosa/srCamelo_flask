@@ -14,28 +14,28 @@
                 <div class="check_formaPag">
                     <div class="option_formaPag">
                         <input type="checkbox" value="dinheiro" id="opt_dinheiro">
-                        <span class="checkmark">
+                        <span class="checkmark" onclick="checkBox('#opt_dinheiro')">
                             <img src="{{url_for('static', filename='/images/dinheiro_icon.svg')}}" alt="">
                         </span>
                         <label for="opt_dinheiro">Dinheiro</label>
                     </div>
                     <div class="option_formaPag">
                         <input type="checkbox" value="debito" id="opt_debito">
-                        <span class="checkmark">
+                        <span class="checkmark" onclick="checkBox('#opt_debito')">
                             <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
                         </span>
                         <label for="opt_debito">Débito</label>
                     </div>
                     <div class="option_formaPag">
                         <input type="checkbox" value="credito" id="opt_credito">
-                        <span class="checkmark">
+                        <span class="checkmark" onclick="checkBox('#opt_credito')">
                             <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
                         </span>
                         <label for="opt_credito">Crédito</label>
                     </div>
                     <div class="option_formaPag">
                         <input type="checkbox" value="pix" id="opt_pix">
-                        <span class="checkmark">
+                        <span class="checkmark" onclick="checkBox('#opt_pix')">
                             <img src="{{url_for('static', filename='/images/pix_icon.svg')}}" alt="">
                         </span>
                         <label for="opt_pix">Pix</label>
@@ -46,4 +46,14 @@
             <button type="button">Finalizar</button>
         </div>
     </div>
+    <script>
+        function checkBox(id){
+            box = window.document.querySelector(id)
+            if(box.checked == true){
+                box.checked = false
+            }else{
+                box.checked = true
+            }
+        }
+    </script>
 {% endblock content %}
