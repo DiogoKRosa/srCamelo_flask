@@ -25,6 +25,7 @@ if __name__ == '__main__':
     with app.app_context():
         if 'usuarios' not in mongo.db.list_collection_names():
             usuario = Usuario(
+                tipo = '',
                 nome = '',
                 cpf = '',
                 email = '',
@@ -35,7 +36,8 @@ if __name__ == '__main__':
                 cidade = '',
                 imagem_perfil = '',
                 nome_fantasia = '',
-                imagem_loja = ''
+                imagem_loja = '',
+                forma_pagamento=[]
             )
             usuario.save()
 

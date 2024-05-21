@@ -15,8 +15,9 @@ class Usuario():
         self.pais = pais
         self.uf = uf
         self.cidade = cidade
-        self.imagem_perfil = imagem_perfil,
-        self.nome_fantasia = forma_pagamento,
+        self.imagem_perfil = imagem_perfil
+        self.nome_fantasia = nome_fantasia
+        self.forma_pagamento = forma_pagamento
         self.imagem_loja = imagem_loja
     
     def save(self):
@@ -32,6 +33,7 @@ class Usuario():
             'cidade': self.cidade,
             'imagem_perfil': self.imagem_perfil,
             'nome_fantasia': self.nome_fantasia,
+            'forma_pagamento': self.forma_pagamento,
             'imagem_loja': self.imagem_loja
         })
         
