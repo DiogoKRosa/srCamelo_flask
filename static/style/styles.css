@@ -235,15 +235,19 @@ h2, h4{
     align-items: center;
     justify-content: center;
 }
-.option_formaPag:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-.option_formaPag input:checked ~ .checkmark {
+.option_formaPag input:hover ~ .checkmark, .option_formaPag .checkmark:hover {
     img{
-        fill: #ffffff
+        filter: brightness(0) saturate(100%) invert(99%) sepia(1%) saturate(2995%) hue-rotate(212deg) brightness(113%) contrast(101%);
     };
     background-color: #5CAC0E;
-  }
+    cursor: pointer;
+}
+.option_formaPag input:checked ~ .checkmark{
+    img{
+        filter: brightness(0) saturate(100%) invert(99%) sepia(1%) saturate(2995%) hue-rotate(212deg) brightness(113%) contrast(101%);
+    };
+    background-color: #5CAC0E;
+}
 .option_formaPag>label{
     margin-left: 10px;
 }
