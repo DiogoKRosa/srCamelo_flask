@@ -1,0 +1,22 @@
+{%extends 'navbar.html'%}
+{%block content%}
+<div class="content">
+    <div class="lista-produtos">
+        <div class="produto">
+            <div class="img-produto"></div>
+            <div class="input-produto">
+                <input placeholder="Nome">
+                <input placeholder="R$ 0,00">
+                <textarea name="" id="" placeholder="&#10;Descrição"></textarea>
+                <input placeholder="Categoria">
+            </div>
+            <img src="{{url_for('static', filename='images/trash-icon.svg')}}">
+        </div>
+    </div>
+    <div class="centralizar">
+        <button type="button" class="button-add">
+            <img src="{{url_for('static', filename='/images/adicionar-icon.svg')}}">
+        </button>
+    </div>
+</div>
+{%endblock content%}

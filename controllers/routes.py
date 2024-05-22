@@ -6,6 +6,7 @@ from bson import json_util
 from uuid import uuid4
 import os
 
+idTeste = '664cebf6fe2966797b820154'
 def init_app(app):
     """ @app.before_request
     def check_session():
@@ -40,7 +41,7 @@ def init_app(app):
                         return redirect(url_for('inicio_vendedor'))
             else:
                 flash("Usuário ou senha incorretos")
-        return render_template('primeiro_acesso.html')
+        return render_template('produtos.html')
     
     @app.route('/cadastro')
     def cadastro():
@@ -114,9 +115,12 @@ def init_app(app):
             nomeImagem = str(uuid4())
             imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
 
-            Usuario.editImagemLoja("664cebf6fe2966797b820154", nomeImagem)
-            Usuario.editNomeFantasia("664cebf6fe2966797b820154", request.form['nome_fantasia'])
-            Usuario.editFormaPagamento("664cebf6fe2966797b820154", request.form.getlist('forma_pagamento'))
-            """ print(request.form['nome_fantasia'])
-            print(request.form.getlist('forma_pagamento')) """
+            Usuario.editImagemLoja(idTeste, nomeImagem)
+            Usuario.editNomeFantasia(idTeste, request.form['nome_fantasia'])
+            Usuario.editFormaPagamento(idTeste, request.form.getlist('forma_pagamento'))
+            return redirect(url_for('produtos'))    
         return render_template('primeiro_acesso.html')
+    
+    @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
+    def produtos():
+        return render_template('produtos.html')

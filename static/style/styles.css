@@ -251,3 +251,63 @@ h2, h4{
 .option_formaPag>label{
     margin-left: 10px;
 }
+
+.lista-produtos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+.produto{
+    display: flex;
+    flex-direction: row;
+    gap: 17px; 
+    align-items: center;
+}
+.img-produto{
+    width: 123px;
+    height: 126px;
+    background-image: url(../images/prod_img_template.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.input-produto{
+    display: flex;
+    flex-direction: column;
+    gap:10px
+}
+
+.input-produto>textarea, .input-produto textarea:focus {
+    width: 140px;
+    height: 33px;
+    border: none;
+    resize: none;
+    background: none;
+    outline: none;
+    border-bottom: 2px solid #FF6700;
+    font-size: 12px;
+}
+.input-produto>input{
+    width: 140px;
+    height: 20px;
+    font-size: 12px;
+}
+.button-add{
+    width: 40px;
+    height: 40px;
+    border: 20px;
+}
+.button-add:hover{
+    img{
+        filter: brightness(0) saturate(100%) invert(99%) sepia(1%) saturate(2995%) hue-rotate(212deg) brightness(113%) contrast(101%);
+    }
+}
+.centralizar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
