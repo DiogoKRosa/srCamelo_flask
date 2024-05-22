@@ -3,15 +3,17 @@ from models.database import Usuario, Produto
 from markupsafe import Markup
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import json_util
+from uuid import uuid4
+import os
 
 def init_app(app):
-    @app.before_request
+    """ @app.before_request
     def check_session():
         routes = ['index', 'cadastro_consumidor', 'cadastro_vendedor']
         if request.endpoint in routes or request.path.startswith('/static/'):
             return
         if 'user_id' not in session:
-            return redirect(url_for('index'))
+            return redirect(url_for('index')) """
 
     @app.route('/', methods=['GET', 'POST'])
     def index():
@@ -105,6 +107,16 @@ def init_app(app):
     def inicio_vendedor():
         return render_template('inicio_vendedor.html')
     
-    @app.route('/primeiro_acesso')
+    @app.route('/primeiro_acesso', methods=['GET', 'POST'])
     def primeiro_acesso():
+        if request.method == 'POST':
+            imagem = request.files['imagem_loja']
+            nomeImagem = str(uuid4())
+            imagem.save(os.path.join(app.config['UPLOAD'], nomeImagem))
+
+            Usuario.editImagemLoja()
+            Usuario.editNomeFantasia()
+            Usuario.editFormaPagamento()
+            print(request.form['nome_fantasia'])
+            print(request.form.getlist('forma_pagamento'))
         return render_template('primeiro_acesso.html')

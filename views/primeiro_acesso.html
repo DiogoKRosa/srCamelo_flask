@@ -1,12 +1,12 @@
 {% extends 'navbar.html' %}
 {% block content %}
     <div class="content">
-        <form action="url_for{{'primeiro_acesso'}}" method="post" enctype="multipart/form-data">
+        <form action="{{url_for('primeiro_acesso')}}" method="post" enctype="multipart/form-data" id="cadPrimeiroAcesso">
             <div class="primeiro_acesso">
                 <div class="banner-template">
                     Pré-visualização
                     <div class="img-banner-default" id="img-banner-default">
-                        <input type="file" id="imagem_loja" accept="image/*" onchange="showImg(event)" hidden>
+                        <input type="file" name="imagem_loja" id="imagem_loja" accept="image/*" onchange="showImg(event)" hidden>
                     </div>
                     <button type="button" onclick="openFile('#imagem_loja')">Adicionar Foto</button>
                 </div>
@@ -80,6 +80,7 @@
         }
 
         function enviarForm2(){
+            var form = window.document.querySelector('#cadPrimeiroAcesso')
             var imagem_loja =  window.document.querySelector('#imagem_loja').value
             var nome_fantasia = window.document.querySelector('#nome_fantasia').value
             var forma_pagamento = window.document.getElementsByName('forma_pagamento')
@@ -88,7 +89,7 @@
             for (var i=0; i<len; i++){
                 forma_pagamento[i].checked ? list.push(forma_pagamento[i].value):''
             }
-
+            return form.submit()
         }
     </script>
 {% endblock content %}

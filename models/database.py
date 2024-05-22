@@ -42,6 +42,9 @@ class Usuario():
         select = mongo.db.usuarios.find_one({'email': email})
         return select
     
+    def editImagemLoja(nomeImagem):
+    def editNomeFantasia(nomeFantasia):
+    def editFormaPagamento(formaPagamento):
 class Produto():
     def __init__(self, id_vendedor, nome, preco, descricao, categoria):
         self.id_vendedor = id_vendedor
