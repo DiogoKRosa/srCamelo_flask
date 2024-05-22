@@ -112,11 +112,11 @@ def init_app(app):
         if request.method == 'POST':
             imagem = request.files['imagem_loja']
             nomeImagem = str(uuid4())
-            imagem.save(os.path.join(app.config['UPLOAD'], nomeImagem))
+            imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
 
-            Usuario.editImagemLoja()
-            Usuario.editNomeFantasia()
-            Usuario.editFormaPagamento()
-            print(request.form['nome_fantasia'])
-            print(request.form.getlist('forma_pagamento'))
+            Usuario.editImagemLoja("664cebf6fe2966797b820154", nomeImagem)
+            Usuario.editNomeFantasia("664cebf6fe2966797b820154", request.form['nome_fantasia'])
+            Usuario.editFormaPagamento("664cebf6fe2966797b820154", request.form.getlist('forma_pagamento'))
+            """ print(request.form['nome_fantasia'])
+            print(request.form.getlist('forma_pagamento')) """
         return render_template('primeiro_acesso.html')

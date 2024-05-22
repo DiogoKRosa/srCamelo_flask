@@ -42,9 +42,21 @@ class Usuario():
         select = mongo.db.usuarios.find_one({'email': email})
         return select
     
-    def editImagemLoja(nomeImagem):
-    def editNomeFantasia(nomeFantasia):
-    def editFormaPagamento(formaPagamento):
+    def editImagemLoja(id ,nomeImagem):
+        filtro = {"_id": ObjectId(id)}
+        update = {'$set':{"imagem_loja": nomeImagem}}
+        mongo.db.usuarios.update_one(filtro, update)
+
+    def editNomeFantasia( id,nomeFantasia):
+        filtro = {"_id": ObjectId(id)}
+        update = {'$set':{"nome_fantasia": nomeFantasia}}
+        mongo.db.usuarios.update_one(filtro, update)
+
+    def editFormaPagamento(id ,formaPagamento):
+        filtro = {"_id": ObjectId(id)}
+        update = {'$set':{"forma_pagamento": formaPagamento}}
+        mongo.db.usuarios.update_one(filtro, update)
+        
 class Produto():
     def __init__(self, id_vendedor, nome, preco, descricao, categoria):
         self.id_vendedor = id_vendedor
