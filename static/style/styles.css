@@ -296,6 +296,14 @@ h2, h4{
     height: 20px;
     font-size: 12px;
 }
+.input-produto>select{
+    height: 20px;
+    font-size: 12px;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #FF6700;
+}
 .button-add{
     width: 40px;
     height: 40px;
