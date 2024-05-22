@@ -1,50 +1,53 @@
 {% extends 'navbar.html' %}
 {% block content %}
     <div class="content">
-        <div class="primeiro_acesso">
-            <div class="banner-template">
-                Pré-visualização
-                <div class="img-banner-default">
+        <form action="url_for{{'primeiro_acesso'}}" method="post" enctype="multipart/form-data">
+            <div class="primeiro_acesso">
+                <div class="banner-template">
+                    Pré-visualização
+                    <div class="img-banner-default" id="img-banner-default">
+                        <input type="file" id="imagem_loja" accept="image/*" onchange="showImg(event)" hidden>
+                    </div>
+                    <button type="button" onclick="openFile('#imagem_loja')">Adicionar Foto</button>
                 </div>
-                <button type="button">Adicionar Foto</button>
-            </div>
-            <input type="text" name="nome_fantasia" id="nome_fantasia" placeholder="Nome Fantasia">
-            <div class="select_formaPag">
-                <h4>Selecione as formas de pagamento:</h4>
-                <div class="check_formaPag">
-                    <div class="option_formaPag">
-                        <input type="checkbox" value="dinheiro" id="opt_dinheiro">
-                        <span class="checkmark" onclick="checkBox('#opt_dinheiro')">
-                            <img src="{{url_for('static', filename='/images/dinheiro_icon.svg')}}" alt="">
-                        </span>
-                        <label for="opt_dinheiro">Dinheiro</label>
-                    </div>
-                    <div class="option_formaPag">
-                        <input type="checkbox" value="debito" id="opt_debito">
-                        <span class="checkmark" onclick="checkBox('#opt_debito')">
-                            <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
-                        </span>
-                        <label for="opt_debito">Débito</label>
-                    </div>
-                    <div class="option_formaPag">
-                        <input type="checkbox" value="credito" id="opt_credito">
-                        <span class="checkmark" onclick="checkBox('#opt_credito')">
-                            <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
-                        </span>
-                        <label for="opt_credito">Crédito</label>
-                    </div>
-                    <div class="option_formaPag">
-                        <input type="checkbox" value="pix" id="opt_pix">
-                        <span class="checkmark" onclick="checkBox('#opt_pix')">
-                            <img src="{{url_for('static', filename='/images/pix_icon.svg')}}" alt="">
-                        </span>
-                        <label for="opt_pix">Pix</label>
+                <input type="text" name="nome_fantasia" id="nome_fantasia" placeholder="Nome Fantasia">
+                <div class="select_formaPag">
+                    <h4>Selecione as formas de pagamento:</h4>
+                    <div class="check_formaPag">
+                        <div class="option_formaPag">
+                            <input type="checkbox" value="dinheiro" id="opt_dinheiro" name="forma_pagamento">
+                            <span class="checkmark" onclick="checkBox('#opt_dinheiro')">
+                                <img src="{{url_for('static', filename='/images/dinheiro_icon.svg')}}" alt="">
+                            </span>
+                            <label for="opt_dinheiro">Dinheiro</label>
+                        </div>
+                        <div class="option_formaPag">
+                            <input type="checkbox" value="debito" id="opt_debito" name="forma_pagamento">
+                            <span class="checkmark" onclick="checkBox('#opt_debito')">
+                                <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
+                            </span>
+                            <label for="opt_debito">Débito</label>
+                        </div>
+                        <div class="option_formaPag">
+                            <input type="checkbox" value="credito" id="opt_credito" name="forma_pagamento">
+                            <span class="checkmark" onclick="checkBox('#opt_credito')">
+                                <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
+                            </span>
+                            <label for="opt_credito">Crédito</label>
+                        </div>
+                        <div class="option_formaPag">
+                            <input type="checkbox" value="pix" id="opt_pix" name="forma_pagamento">
+                            <span class="checkmark" onclick="checkBox('#opt_pix')">
+                                <img src="{{url_for('static', filename='/images/pix_icon.svg')}}" alt="">
+                            </span>
+                            <label for="opt_pix">Pix</label>
+                        </div>
                     </div>
                 </div>
+                <!-- <button type="button">Cadastrar Produtos</button> -->
+                <button type="button" onclick="enviarForm2()">Cadastrar Produtos</button>
             </div>
-            <button type="button">Cadastrar Produtos</button>
-            <button type="button">Finalizar</button>
-        </div>
+        </form>
     </div>
     <script>
         function checkBox(id){
@@ -54,6 +57,38 @@
             }else{
                 box.checked = true
             }
+        }
+
+        function openFile(id){
+            input = window.document.querySelector(id)
+            if(input && document.createEvent) {
+                var evt = document.createEvent("MouseEvents");
+                evt.initEvent("click", true, false);
+                input.dispatchEvent(evt);
+            }
+        }
+
+        function showImg(event){
+            var selectedFile = event.target.files[0]
+            var banner = window.document.querySelector('#img-banner-default')
+            var reader = new FileReader()
+            reader.onload = function(event) {
+            banner.style.background = `url(${event.target.result}) center/cover no-repeat`
+            };
+  
+            reader.readAsDataURL(selectedFile);
+        }
+
+        function enviarForm2(){
+            var imagem_loja =  window.document.querySelector('#imagem_loja').value
+            var nome_fantasia = window.document.querySelector('#nome_fantasia').value
+            var forma_pagamento = window.document.getElementsByName('forma_pagamento')
+            var len = forma_pagamento.length;
+            var list = []
+            for (var i=0; i<len; i++){
+                forma_pagamento[i].checked ? list.push(forma_pagamento[i].value):''
+            }
+
         }
     </script>
 {% endblock content %}
