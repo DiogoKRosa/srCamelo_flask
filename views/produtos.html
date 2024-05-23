@@ -1,27 +1,65 @@
 {%extends 'navbar.html'%}
 {%block content%}
 <div class="content">
-    <div class="lista-produtos">
-        <div class="produto">
-            <div class="img-produto"></div>
-            <div class="input-produto">
-                <input placeholder="Nome">
-                <input placeholder="R$ 0,00">
-                <textarea name="" id="" placeholder="&#10;Descrição"></textarea>
-                <select name="" id="">
-                    <option value="">Categoria</option>
-                    <option value="">Lanche</option>
-                    <option value="">Lanche</option>
-                    <option value="">Lanche</option>
-                </select>
-            </div>
-            <img src="{{url_for('static', filename='images/trash-icon.svg')}}">
-        </div>
+    <div class="lista-produtos" id="lista-produtos">
     </div>
     <div class="centralizar">
-        <button type="button" class="button-add">
+        <button type="button" class="button-add" onclick="addInputProduto()">
             <img src="{{url_for('static', filename='/images/adicionar-icon.svg')}}">
         </button>
+        <button type="button">Finalizar</button>
     </div>
 </div>
+<script>
+    function addInputProduto(){
+        lista = window.document.getElementById('lista-produtos')
+        num = lista.childElementCount + 1
+        
+        div = document.createElement("div")
+        div.classList.add('produto')
+        div.id = `produto-${num}`
+        div.innerHTML = `
+            <div class="img-produto"></div>
+            <div class="input-produto">
+                <input placeholder="Nome" name="nome_produto-${num}" id="nome_produto-${num}">
+                <input placeholder="R$ 0,00" name="preco_produto-${num}" id="preco_produto-${num}">
+                <textarea placeholder="&#10;Descrição" name="descricao_produto-${num}" id="descricao_produto-${num}"></textarea>
+                <select name="categoria_produto-${num}" id="categoria_produto-${num}">
+                    <option value="" disabled selected hidden>Categoria</option>
+                    <option value="">Lanche</option>
+                    <option value="">Doce</option>
+                    <option value="">Bebidas</option>
+                </select>
+            </div>
+            <img class="excluir-produto" src="{{url_for('static', filename='images/trash-icon.svg')}}" onclick="deletarProduto('produto-${num}')">`
+        lista.appendChild(div)
+    }
+
+    function deletarProduto(id){
+        num = lista.childElementCount
+        elem = document.getElementById(id)
+        document.getElementById('lista-produtos').removeChild(elem)
+        produtos = window.document.getElementsByClassName('produto')
+        for(i=1; i<=num; i++){
+            console.log(i)
+            input_nome = document.getElementById(`nome_produto-${i}`)
+            input_preco = document.getElementById(`preco_produto-${i}`)
+            input_descricao = document.getElementById(`descricao_produto-${i}`)
+            input_categoria = document.getElementById(`categoria_produto-${i}`)
+
+            /* if(input_nome || input_preco || input_descricao || input_categoria){
+                input_nome = document.getElementById(`nome_produto-${i+1}`)
+                input_preco = document.getElementById(`preco_produto-${i+1}`)
+                input_descricao = document.getElementById(`descricao_produto-${i+1}`)
+                input_categoria = document.getElementById(`categoria_produto-${i+1}`)
+            } */
+
+            produtos[i].id = `produto-${i}`
+            input_nome.id = `nome_produto-${i}`
+            input_preco.id = `preco_produto-${i}`
+            input_descricao.id = `descricao_produto-${i}`
+            input_categoria.id = `categoria_produto-${i}`
+        }
+    }
+</script>
 {%endblock content%}
