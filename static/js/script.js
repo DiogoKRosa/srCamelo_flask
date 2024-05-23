@@ -84,3 +84,45 @@ function conferirNulo(nome, cpf, email, telefone, senha, cSenha, pais, uf, cidad
     console.log("Falso")
     return false
 }
+
+function checkBox(id){
+    box = window.document.querySelector(id)
+    if(box.checked == true){
+        box.checked = false
+    }else{
+        box.checked = true
+    }
+}
+
+function openFile(id){
+    input = window.document.querySelector(id)
+    if(input && document.createEvent) {
+        var evt = document.createEvent("MouseEvents");
+        evt.initEvent("click", true, false);
+        input.dispatchEvent(evt);
+    }
+}
+
+function showImg(event, id){
+    var selectedFile = event.target.files[0]
+    var banner = window.document.querySelector(id)
+    var reader = new FileReader()
+    reader.onload = function(event) {
+    banner.style.background = `url(${event.target.result}) center/cover no-repeat`
+    };
+
+    reader.readAsDataURL(selectedFile);
+}
+
+function enviarForm2(){
+    var form = window.document.querySelector('#cadPrimeiroAcesso')
+    var imagem_loja =  window.document.querySelector('#imagem_loja').value
+    var nome_fantasia = window.document.querySelector('#nome_fantasia').value
+    var forma_pagamento = window.document.getElementsByName('forma_pagamento')
+    var len = forma_pagamento.length;
+    var list = []
+    for (var i=0; i<len; i++){
+        forma_pagamento[i].checked ? list.push(forma_pagamento[i].value):''
+    }
+    return form.submit()
+}

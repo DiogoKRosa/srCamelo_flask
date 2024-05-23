@@ -6,7 +6,7 @@ from bson import json_util
 from uuid import uuid4
 import os
 
-idTeste = '664cebf6fe2966797b820154'
+idTeste = '664414764e592646aae62ac3'
 def init_app(app):
     """ @app.before_request
     def check_session():
@@ -123,4 +123,15 @@ def init_app(app):
     
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
+        if request.method == 'POST':
+            qtde = int(request.form['qtde'])
+            i=0
+            lista =[]
+            while i<=qtde:
+                try:
+                    lista.append(int(request.form[f'id_produto-{i}']))
+                    i+=1
+                except:
+                    i+=1
+            print(lista)
         return render_template('produtos.html')
