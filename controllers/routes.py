@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash, session
-from models.database import Usuario, Produto
+from models.database import Usuario, Produto, Categoria
 from markupsafe import Markup
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import json_util
@@ -124,6 +124,7 @@ def init_app(app):
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
         produtos = Produto.selectByVendedor(idTeste)
+        categorias = Categoria.find()
         print(produtos)
         if request.method == 'POST':
             #Traz os Ids dos produtos do forms
@@ -149,4 +150,4 @@ def init_app(app):
                                categoria=request.form.get(f'categoria_produto-{x}'),
                                imagem=nomeImagem)
                 novo.save()
-        return render_template('produtos.html', produtos=produtos)
+        return render_template('produtos.html', produtos=produtos, categorias=categorias)

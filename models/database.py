@@ -92,5 +92,10 @@ class Categoria():
             'categoria': self.categoria
         })
     
+    @staticmethod
+    def find():
+        return mongo.db.categorias.find()
+
+    
 
     
