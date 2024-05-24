@@ -1,5 +1,5 @@
 from flask_pymongo import PyMongo
-from bson import ObjectId
+from bson import ObjectId, json_util
 from flask import jsonify
 
 mongo = PyMongo()
@@ -58,24 +58,30 @@ class Usuario():
         mongo.db.usuarios.update_one(filtro, update)
         
 class Produto():
-    def __init__(self, id_vendedor, nome, preco, descricao, categoria):
+    def __init__(self, id_vendedor, id, nome, preco, descricao, categoria, imagem):
         self.id_vendedor = id_vendedor
+        self.id = id
         self.nome = nome
         self.preco = preco
         self.descricao = descricao
         self.categoria = categoria
+        self.imagem = imagem
 
     def save(self):
         mongo.db.produtos.insert_one({
             'id_vendedor': self.id_vendedor,
+            'id': self.id,
             'nome': self.nome,
             'preco': self.preco,
             'descricao': self.descricao,
-            'categoria': self.categoria
+            'categoria': self.categoria,
+            'imagem': self.imagem
         })
     
     @staticmethod
     def selectByVendedor(id_vendedor):
         select = mongo.db.produtos.find({'id_vendedor':id_vendedor})
         return select
+    
+
     

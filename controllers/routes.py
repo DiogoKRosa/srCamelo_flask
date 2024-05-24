@@ -123,7 +123,10 @@ def init_app(app):
     
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
+        produtos = Produto.selectByVendedor(idTeste)
+        print(produtos)
         if request.method == 'POST':
+            #Traz os Ids dos produtos do forms
             qtde = int(request.form['qtde'])
             i=0
             lista =[]
@@ -133,5 +136,17 @@ def init_app(app):
                     i+=1
                 except:
                     i+=1
-            print(lista)
-        return render_template('produtos.html')
+            #Cadastro de produtos
+            for x in lista:
+                imagem = request.files[f'imagem_produto-{x}']
+                nomeImagem = str(uuid4())
+                imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
+                novo = Produto(id_vendedor=idTeste, 
+                               id=request.form[f'id_produto-{x}'],
+                               nome=request.form[f'nome_produto-{x}'],
+                               preco=request.form[f'preco_produto-{x}'],
+                               descricao=request.form[f'descricao_produto-{x}'],
+                               categoria=request.form.get(f'categoria_produto-{x}'),
+                               imagem=nomeImagem)
+                novo.save()
+        return render_template('produtos.html', produtos=produtos)

@@ -3,6 +3,27 @@
 <div class="content">
     <form class="lista-produtos" id="lista-produtos" action="{{url_for('produtos')}}" method="POST" enctype="multipart/form-data">
         <input type="number" name="qtde" value="" id="qtde-produtos" hidden>
+
+        {% for produto in produtos %}
+        <div class="produto" id="produto-{{produto['id']}}">
+            <input type="file" name="imagem_produto-{{produto['id']}}" id="imagem_produto-{{produto['id']}}" accept="image/*" onchange="showImg(event, '#img-produto-default-{{produto['id']}}')" value="{{produto['imagem']}}" hidden>
+            <div class="img-produto" id="img-produto-default-{{produto['id']}}" onclick="openFile('#imagem_produto-{{produto['id']}}')" style="background: url('../static/uploads/{{produto['imagem']}}') center/cover no-repeat">
+            </div>
+            <div class="input-produto">
+                <input name="id_produto-{{produto['id']}}" value="{{produto['id']}}" hidden>
+                <input placeholder="Nome" name="nome_produto-{{produto['id']}}" id="nome_produto-{{produto['id']}}" value="{{produto['nome']}}">
+                <input placeholder="R$ 0,00" name="preco_produto-{{produto['id']}}" id="preco_produto-  {{produto['id']}}" value="{{produto['preco']}}">
+                <textarea placeholder="&#10;Descrição" name="descricao_produto-{{produto['id']}}"   id="descricao_produto-{{produto['id']}}">{{produto['descricao']}}</textarea>
+                <select name="categoria_produto-{{produto['id']}}" id="categoria_produto-{{produto['id']}}">
+                    <option value="Lanche">Lanche</option>
+                    <option value="Doce">Doce</option>
+                    <option value="Bebidas">Bebidas</option>
+                </select>
+            </div>
+            <img class="excluir-produto" src="{{url_for('static', filename='images/trash-icon.svg')}}" onclick="deletarProduto('produto-{{produto['id']}}')">
+        </div>
+        {%endfor%}
+
     </form>
     <div class="centralizar">
         <button type="button" class="button-add" onclick="addInputProduto()">
@@ -31,9 +52,9 @@
                 <textarea placeholder="&#10;Descrição" name="descricao_produto-${num}" id="descricao_produto-${num}"></textarea>
                 <select name="categoria_produto-${num}" id="categoria_produto-${num}">
                     <option value="" disabled selected hidden>Categoria</option>
-                    <option value="">Lanche</option>
-                    <option value="">Doce</option>
-                    <option value="">Bebidas</option>
+                    <option value="Lanche">Lanche</option>
+                    <option value="Doce">Doce</option>
+                    <option value="Bebidas">Bebidas</option>
                 </select>
             </div>
             <img class="excluir-produto" src="{{url_for('static', filename='images/trash-icon.svg')}}" onclick="deletarProduto('produto-${num}')">`

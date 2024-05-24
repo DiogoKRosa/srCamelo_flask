@@ -44,10 +44,12 @@ if __name__ == '__main__':
         if 'produtos' not in mongo.db.list_collection_names():
             produto = Produto(
                 id_vendedor='',
+                id= '',
                 nome='',
                 preco=0,
-                descricao='',
-                categoria=''
+                descricao = '',
+                categoria = '',
+                imagem = ''
             )
             produto.save()
 
