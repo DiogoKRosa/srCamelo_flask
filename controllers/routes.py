@@ -125,21 +125,33 @@ def init_app(app):
     def produtos():
         produtos = list(Produto.selectByVendedor(idTeste))
         categorias = Categoria.find()
-
+        idBanco = [int(res['id']) for res in produtos]
+        teste1 = [1,2,3,4,5]
+        teste2 = [2,4,6,7]
+        filtro = list(filter(lambda x: x not in teste1, teste2))
+        filtro2 = list(filter(lambda x: x in teste1, teste2))
+        filtro3 = list(filter(lambda x: x not in teste2, teste1))
+        print(filtro, filtro2, filtro3)
         
         if request.method == 'POST':
             #Traz os Ids dos produtos do forms
             qtde = int(request.form['qtde'])
             i=0
-            lista =[]
+            idPost =[]
             while i<=qtde:
                 try:
-                    lista.append(int(request.form[f'id_produto-{i}']))
+                    idPost.append(int(request.form[f'id_produto-{i}']))
                     i+=1
                 except:
                     i+=1
-            #Cadastro de produtos
-            for x in lista:
+
+            #Separa os ids em três lista diferentes [adicionar, atualizar e deletar]
+            adicionar = list(filter(lambda x: x not in idBanco, idPost))
+            atualizar = list(filter(lambda x: x in idBanco, idPost))
+            deletar = list(filter(lambda x: x not in idPost, idBanco))
+
+            #Cadastra novo produto
+            for x in adicionar:
                 imagem = request.files[f'imagem_produto-{x}']
                 nomeImagem = str(uuid4())
                 imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
@@ -151,4 +163,11 @@ def init_app(app):
                                categoria=request.form.get(f'categoria_produto-{x}'),
                                imagem=nomeImagem)
                 novo.save()
+            
+            #Atualiza produto
+            for x in atualizar:
+                print(x)
+            #Deleta produto do banco
+            for x in deletar:
+                print(x)
         return render_template('produtos.html', produtos=produtos, categorias=categorias)
