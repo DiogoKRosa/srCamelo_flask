@@ -123,9 +123,10 @@ def init_app(app):
     
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
-        produtos = Produto.selectByVendedor(idTeste)
+        produtos = list(Produto.selectByVendedor(idTeste))
         categorias = Categoria.find()
-        print(produtos)
+
+        
         if request.method == 'POST':
             #Traz os Ids dos produtos do forms
             qtde = int(request.form['qtde'])
