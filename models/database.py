@@ -83,5 +83,14 @@ class Produto():
         select = mongo.db.produtos.find({'id_vendedor':id_vendedor})
         return select
     
+class Categoria():
+    def __init__(self, categoria):
+        self.categoria = categoria
+
+    def save(self):
+        mongo.db.categorias.insert_one({
+            'categoria': self.categoria
+        })
+    
 
     
