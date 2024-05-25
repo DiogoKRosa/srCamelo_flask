@@ -83,6 +83,21 @@ class Produto():
         select = mongo.db.produtos.find({'id_vendedor':id_vendedor})
         return select
     
+    def update(self, id, id_vendedor):
+        mongo.db.produtos.update_one({'id': str(id), 'id_vendedor': id_vendedor},
+                                       {'$set':{
+                                           'nome': self.nome,
+                                           'preco': self.preco,
+                                           'descricao': self.descricao,
+                                           'categoria': self.categoria,
+                                           'imagem': self.imagem,
+                                       }})
+    @staticmethod
+    def delete(id, id_vendedor):
+        """ produto = mongo.db.produtos.find_one({'id_vendedor':id_vendedor, 'id': str(id)})
+        print(produto) """
+        mongo.db.produtos.delete_one({'id_vendedor':id_vendedor, 'id': str(id)})
+
 class Categoria():
     def __init__(self, categoria):
         self.categoria = categoria

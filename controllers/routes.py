@@ -108,7 +108,7 @@ def init_app(app):
     def inicio_vendedor():
         return render_template('inicio_vendedor.html')
     
-    @app.route('/primeiro_acesso', methods=['GET', 'POST'])
+    @app.route('/primeiro-acesso', methods=['GET', 'POST'])
     def primeiro_acesso():
         if request.method == 'POST':
             imagem = request.files['imagem_loja']
@@ -126,12 +126,6 @@ def init_app(app):
         produtos = list(Produto.selectByVendedor(idTeste))
         categorias = Categoria.find()
         idBanco = [int(res['id']) for res in produtos]
-        teste1 = [1,2,3,4,5]
-        teste2 = [2,4,6,7]
-        filtro = list(filter(lambda x: x not in teste1, teste2))
-        filtro2 = list(filter(lambda x: x in teste1, teste2))
-        filtro3 = list(filter(lambda x: x not in teste2, teste1))
-        print(filtro, filtro2, filtro3)
         
         if request.method == 'POST':
             #Traz os Ids dos produtos do forms
@@ -149,7 +143,7 @@ def init_app(app):
             adicionar = list(filter(lambda x: x not in idBanco, idPost))
             atualizar = list(filter(lambda x: x in idBanco, idPost))
             deletar = list(filter(lambda x: x not in idPost, idBanco))
-
+            print(adicionar, atualizar, deletar)
             #Cadastra novo produto
             for x in adicionar:
                 imagem = request.files[f'imagem_produto-{x}']
@@ -166,8 +160,29 @@ def init_app(app):
             
             #Atualiza produto
             for x in atualizar:
-                print(x)
+                reg = list(filter(lambda y: y['id'] == x, produtos))
+                print(reg)
+                imagem = request.files[f'imagem_produto-{x}']
+                if reg.imagem == imagem.name:
+                    print('achei')
+                    nomeImagem = str(uuid4())
+                    imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
+                else:
+                    print('nada')
+
+                att = Produto(id_vendedor=idTeste,
+                              id=request.form[f'id_produto-{x}'],
+                              nome=request.form[f'nome_produto-{x}'],
+                              preco=request.form[f'preco_produto-{x}'],
+                              descricao=request.form[f'descricao_produto-{x}'],
+                              categoria=request.form.get(f'categoria_produto-{x}'),
+                              imagem=nomeImagem)
+                Produto.update(att, x, idTeste)
+            
+            
             #Deleta produto do banco
             for x in deletar:
-                print(x)
+                Produto.delete(x, idTeste)
+            return redirect(url_for('produtos'))
+
         return render_template('produtos.html', produtos=produtos, categorias=categorias)
