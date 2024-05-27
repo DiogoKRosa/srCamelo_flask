@@ -160,15 +160,14 @@ def init_app(app):
             
             #Atualiza produto
             for x in atualizar:
-                reg = list(filter(lambda y: y['id'] == x, produtos))
-                print(reg)
+                reg = list(filter(lambda y: y['id'] == str(x), produtos))
                 imagem = request.files[f'imagem_produto-{x}']
-                if reg.imagem == imagem.name:
-                    print('achei')
+                
+                if imagem.filename == '':
+                    nomeImagem = reg[0]['imagem']
+                else:
                     nomeImagem = str(uuid4())
                     imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
-                else:
-                    print('nada')
 
                 att = Produto(id_vendedor=idTeste,
                               id=request.form[f'id_produto-{x}'],
