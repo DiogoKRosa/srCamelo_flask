@@ -41,7 +41,7 @@ def init_app(app):
                         return redirect(url_for('inicio_vendedor'))
             else:
                 flash("Usuário ou senha incorretos")
-        return render_template('produtos.html')
+        return render_template('index.html')
     
     @app.route('/cadastro')
     def cadastro():
@@ -106,6 +106,7 @@ def init_app(app):
     
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
+
         return render_template('inicio_vendedor.html')
     
     @app.route('/primeiro-acesso', methods=['GET', 'POST'])

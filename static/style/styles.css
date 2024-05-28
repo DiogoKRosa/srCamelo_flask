@@ -54,6 +54,15 @@ body{
     transition: 200ms;
     cursor: pointer;
 }
+.menu{
+    width: 27px;
+    height: 36px; 
+}
+.menu:hover{
+    transform: scale(1.1);
+    transition: 200ms;
+    cursor: pointer;
+}
 .content{
     flex: 1 1 auto;
     background-color: #FFF1E8;

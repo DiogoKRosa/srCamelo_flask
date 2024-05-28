@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style/styles.css')}}">
+    <link rel="icon" href="{{url_for('static', filename='images/orange_icon.png')}}">
+    <title>Sr. Camelô</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            <div class="nav-esquerda">
+                <img class="menu" src="{{url_for('static', filename='images/menu_icon.svg')}}">
+            </div>
+
+            <div class="radius"></div>
+        </div>  
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</body>
+</html>
