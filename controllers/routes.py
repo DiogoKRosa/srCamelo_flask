@@ -124,7 +124,7 @@ def init_app(app):
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
         produtos = list(Produto.selectByVendedor(idTeste))
-        categorias = Categoria.find()
+        categorias = list(Categoria.find())
         idBanco = [int(res['id']) for res in produtos]
         
         if request.method == 'POST':
@@ -182,6 +182,6 @@ def init_app(app):
             #Deleta produto do banco
             for x in deletar:
                 Produto.delete(x, idTeste)
-            return redirect(url_for('produtos'))
+            return redirect(url_for('inicio_vendedor'))
 
         return render_template('produtos.html', produtos=produtos, categorias=categorias)

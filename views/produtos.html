@@ -4,20 +4,20 @@
     <form class="lista-produtos" id="lista-produtos" action="{{url_for('produtos')}}" method="POST" enctype="multipart/form-data">
         <input type="number" name="qtde" value="{{produtos[-1]['id']}}" id="qtde-produtos" hidden>
 
-        {% for produto in produtos %}
+        {%for produto in produtos%}
         <div class="produto" id="produto-{{produto['id']}}">
             <input type="file" name="imagem_produto-{{produto['id']}}" id="imagem_produto-{{produto['id']}}" accept="image/*" onchange="showImg(event, '#img-produto-default-{{produto['id']}}')" hidden>
             <div class="img-produto" id="img-produto-default-{{produto['id']}}" onclick="openFile('#imagem_produto-{{produto['id']}}')" style="background: url('../static/uploads/{{produto['imagem']}}') center/cover no-repeat">
             </div>
-            <div class="input-produto">
-                <input name="id_produto-{{produto['id']}}" value="{{produto['id']}}" hidden>
+            <div class="input-produto" id="input_produto-{{produto['id']}}">
+                <input name="id_produto-{{produto['id']}}" value="{{produto['id']}}" id="id_produto-{{produto['id']}}" hidden>
                 <input placeholder="Nome" name="nome_produto-{{produto['id']}}" id="nome_produto-{{produto['id']}}" value="{{produto['nome']}}">
                 <input placeholder="R$ 0,00" name="preco_produto-{{produto['id']}}" id="preco_produto-{{produto['id']}}" value="{{produto['preco']}}">
                 <textarea placeholder="&#10;Descrição" name="descricao_produto-{{produto['id']}}"   id="descricao_produto-{{produto['id']}}">{{produto['descricao']}}</textarea>
                 <select name="categoria_produto-{{produto['id']}}" id="categoria_produto-{{produto['id']}}">
-                    {% for categoria in categorias %}
-                    <option value="{{categoria['categoria']}}" {% if produto['categoria'] == categoria['categoria'] %}selected{% endif %}>{{categoria['categoria']}}</option>
-                    {% endfor %}
+                {%for categoria in categorias%}
+                    <option value="{{categoria['categoria']}}" {%if produto['categoria'] == categoria['categoria']%} selected {%endif%}>{{categoria['categoria']}}</option>
+                {%endfor%}
                 </select>
             </div>
             <img class="excluir-produto" src="{{url_for('static', filename='images/trash-icon.svg')}}" onclick="deletarProduto('produto-{{produto['id']}}')">
@@ -42,19 +42,19 @@
         div.classList.add('produto')
         div.id = `produto-${num}`
         div.innerHTML = `
-            <input type="file" name="imagem_produto-${num}" id="imagem_produto-${num}" accept="image/*" onchange="showImg(event, '#img-produto-default-${num}')" hidden>
+        <input type="file" name="imagem_produto-${num}" id="imagem_produto-${num}" accept="image/*" onchange="showImg(event, '#img-produto-default-${num}')" hidden>
             <div class="img-produto" id="img-produto-default-${num}" onclick="openFile('#imagem_produto-${num}')">
             </div>
-            <div class="input-produto">
-                <input name="id_produto-${num}" value="${num}" hidden>
+            <div class="input-produto" id="input_produto-${num}">
+                <input name="id_produto-${num}" value="${num}" id="id_produto-${num}" hidden>
                 <input placeholder="Nome" name="nome_produto-${num}" id="nome_produto-${num}">
                 <input placeholder="R$ 0,00" name="preco_produto-${num}" id="preco_produto-${num}">
-                <textarea placeholder="&#10;Descrição" name="descricao_produto-${num}" id="descricao_produto-${num}"></textarea>
+                <textarea placeholder="&#10;Descrição" name="descricao_produto-${num}"   id="descricao_produto-${num}"></textarea>
                 <select name="categoria_produto-${num}" id="categoria_produto-${num}">
-                    <option value="" disabled selected hidden>Categoria</option>
-                    {% for categoria in categorias %}
-                    <option value="{{categoria['categoria']}}" {% if produto['categoria'] == categoria['categoria'] %}selected{% endif %}>{{categoria['categoria']}}</option>
-                    {% endfor %}
+                    <option hidden disable>Categoria</option>
+                    {%for categoria in categorias%}
+                    <option value="{{categoria['categoria']}}">{{categoria['categoria']}}</option>
+                    {%endfor%}
                 </select>
             </div>
             <img class="excluir-produto" src="{{url_for('static', filename='images/trash-icon.svg')}}" onclick="deletarProduto('produto-${num}')">`
