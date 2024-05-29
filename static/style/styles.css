@@ -365,3 +365,11 @@ h2, h4{
     flex-direction: column;
     align-items: center;
 }
+
+.informacoes-vendedor{
+    outline: solid 1px black;
+}
+.informacoes-vendedor>.banner{
+    width: 390px;
+    height: 178px;
+}
