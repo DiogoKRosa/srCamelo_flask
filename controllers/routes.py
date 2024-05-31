@@ -106,9 +106,12 @@ def init_app(app):
     
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
-
         return render_template('inicio_vendedor.html')
     
+    @app.route('/dados/vendedor')
+    def dados_vendedor():
+        return render_template('dados_vendedor.html')
+
     @app.route('/primeiro-acesso', methods=['GET', 'POST'])
     def primeiro_acesso():
         if request.method == 'POST':
@@ -122,6 +125,7 @@ def init_app(app):
             return redirect(url_for('produtos'))    
         return render_template('primeiro_acesso.html')
     
+    @app.route('/produtos', methods=['GET', 'POST'])
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
         produtos = list(Produto.selectByVendedor(idTeste))
@@ -184,5 +188,4 @@ def init_app(app):
             for x in deletar:
                 Produto.delete(x, idTeste)
             return redirect(url_for('inicio_vendedor'))
-
         return render_template('produtos.html', produtos=produtos, categorias=categorias)

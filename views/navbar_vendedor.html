@@ -18,13 +18,17 @@
         <div class="menu-content" id="menu-content" hidden>
             <img class="menu" src ="{{url_for('static', filename='images/close_icon.svg')}}" onclick="closeMenu()">
             <div class="perfil-logado">
-                <img src="{{url_for('static', filename='images/perfil.png')}}">
-                <p>Bem vindo! Daniel :)</p>
+                <img src="{{url_for('static', filename='images/perfil_vendedor.png')}}">
+                <h2 style="color: #ffffff;">José Lanches</h2>
             </div>
             <div class="links">
+                <a href="">Mapa</a>
                 <a href="">Menu Principal</a>
                 <a href="">Vendas</a>
+                <a href="">Dados Cadastrais</a>
                 <a href="">Produtos</a>
+                <a href="">Sobre</a>
+                <a href="">Sair</a>
             </div>
         </div>
         {% block content %}
