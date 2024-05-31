@@ -1,21 +1,62 @@
 {% extends 'navbar_vendedor.html' %}
 {% block content %}
 <div class="content">
-<div class="informacoes-vendedor">
-    <div class="banner" style="background: url('../static/images/banner_template.svg') center/cover no-repeat"></div>
-    <div class="texto">
-        <p>Telefone: (13) 99777-0607</p>
-        <p>E-mail: jose.lanches@gmail.com.br</p>
+<div class="pag-vendedor">
+    <div class="informacoes-vendedor">
+        <div class="banner" style="background: url('../static/images/dogao.png') center/cover no-repeat"></div>
+        <div class="texto">
+            <p>Telefone: (13) 99777-0607</p>
+            <p>E-mail: jose.lanches@gmail.com.br</p>
+        </div>
     </div>
-</div>
-<div class="produtos-vendedor">
-    <h4>Produtos disponíveis</h4>
-    <div class="produto">
-
+    <div class="produtos-vendedor">
+        <h3>Produtos disponíveis</h3>
+        <div class="produto">
+            <div class="img-produto-vendedor" style="background: url('../static/images/dogao.png') center/cover no-repeat"></div>
+            <div class="inf-produto-vendedor">
+                <p style="font-size: 16px; margin-top:0;">Dogão</p>
+                <p>Preço: R$9,00</p>
+                <p>Dogão com salsicha e mostarda</p>
+            </div>
+        </div>
+        <div class="produto">
+            <div class="img-produto-vendedor" style="background: url('../static/images/pizza.png') center/cover no-repeat"></div>
+            <div class="inf-produto-vendedor">
+                <p style="font-size: 16px; margin-top:0;">Dogão</p>
+                <p>Preço: R$9,00</p>
+                <p>Dogão com salsicha e mostarda</p>
+            </div>
+        </div>
+        <div class="produto">
+            <div class="img-produto-vendedor" style="background: url('../static/images/laranjinha.png') center/cover no-repeat"></div>
+            <div class="inf-produto-vendedor">
+                <p style="font-size: 16px; margin-top:0;">Dogão</p>
+                <p>Preço: R$9,00</p>
+                <p>Dogão com salsicha e mostarda</p>
+            </div>
+        </div>
     </div>
-</div>
-<div class="pagamento-vendedor">
-    <div class="opcao"></div>
+    <div class="pagamento-vendedor">
+        <h3>Tipos de pagamentos aceitos</h3>
+        <div>
+            <div class="opcao">
+                <img src="../static/images/dinheiro_icon.svg">
+                Dinheiro
+            </div>
+            <div class="opcao">
+                <img src="../static/images/dinheiro_icon.svg">
+                Dinheiro
+            </div>
+            <div class="opcao">
+                <img src="../static/images/dinheiro_icon.svg">
+                Dinheiro
+            </div>
+            <div class="opcao">
+                <img src="../static/images/dinheiro_icon.svg">
+                Dinheiro
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 {% endblock content %}
