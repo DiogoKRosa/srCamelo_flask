@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style/styles.css')}}">
+    <link rel="icon" href="{{url_for('static', filename='images/orange_icon.png')}}">
+    <title>Sr. Camelô</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            <div class="nav-content">
+                <div class="nav-esquerda">
+                <img class="menu" src="{{url_for('static', filename='images/menu_icon.svg')}}" onclick="showMenu()">
+            </div>
+            <div class="pesquisa">
+                <input type="text" placeholder="Pesquise aqui...">
+                <img src="../static/images/pesquisa.svg">
+            </div>
+        </div>
+            <div class="radius"></div>
+        </div>
+        <div class="menu-content" id="menu-content" hidden>
+            <img class="menu" src="{{url_for('static', filename='images/close_icon.svg')}}" onclick="closeMenu()">
+            <div class="perfil-logado">
+                <img src="{{url_for('static', filename='images/perfil_vendedor.png')}}">
+                <h2 style="color: #ffffff;">Daniel</h2>
+            </div>
+            <div class="links">
+                <a href="">Menu Principal</a>
+                <a href="">Pedidos</a>
+                <a href="">Dados Cadastrais</a>
+                <a href="">Cartões</a>
+                <a href="">Sobre</a>
+                <a href="">Sair</a>
+            </div>
+        </div>
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script>
+        function showMenu() {
+            content = document.querySelector('#menu-content')
+            content.style.display = 'flex'
+        }
+        function closeMenu() {
+            content = document.querySelector('#menu-content')
+            content.style.display = 'none'
+        }
+    </script>
+</body>
+
+</html>

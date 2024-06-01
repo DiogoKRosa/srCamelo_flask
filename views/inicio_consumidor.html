@@ -1,1 +1,34 @@
-inicio consumidor
+{% extends 'navbar_consumidor.html' %}
+{% block content %}
+<div class="content">
+    <div class="categorias">
+        <h4>Filtrar por</h4>
+        <div class="opcoes-categoria">
+            <div class="opcao">
+                <div>
+                    <img src="../static/images/hot-dog.svg" alt="">
+                </div>
+                <p>Salgados</p>
+            </div>
+            <div class="opcao">
+                <div>
+                    <img src="../static/images/cupcake.svg" alt="">
+                </div>
+                <p>Doces</p>
+            </div>
+            <div class="opcao">
+                <div>
+                    <img src="../static/images/suco.svg" alt="">
+                </div>
+                <p>Bebidas</p>
+            </div>
+            <div class="opcao">
+                <div>
+                    <img src="../static/images/colar.svg" alt="">
+                </div>
+                <p>Acessório</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
