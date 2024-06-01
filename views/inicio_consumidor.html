@@ -1,6 +1,7 @@
 {% extends 'navbar_consumidor.html' %}
 {% block content %}
 <div class="content">
+    <div class="centralizar">
     <div class="categorias">
         <h4>Filtrar por</h4>
         <div class="opcoes-categoria">
@@ -30,5 +31,49 @@
             </div>
         </div>
     </div>
+    <div class="mapa">
+        <h4>Localização</h4>
+        <div>
+            <img src="../static/images/mapa.png" alt="">
+        </div>
+    </div>
+    <div class="vendedores-proximo">
+        <h4>Vendedores Próximos</h4>
+        <div class="lista-vendedores">
+            <div class="vendedor">
+                <div class="vendedor-imagem" style="background:url('../static/images/dogao.png') center/cover no-repeat;"></div>
+                <div>José Lanches</div>
+                <div>500m</div>
+            </div>
+            <div class="vendedor">
+                <div class="vendedor-imagem" style="background:url('../static/images/frutafeira.jpg') center/cover no-repeat;"></div>
+                <div>Fruta Feira</div>
+                <div>2km</div>
+            </div>
+            <div class="vendedor">
+                <div class="vendedor-imagem" style="background:url('../static/images/licadoce.jpg') center/cover no-repeat;"></div>
+                <div>Lica Doce</div>
+                <div>2.2km</div>
+            </div>
+        </div>
+    </div>
+    <div class="historico">
+        <h4>Histórico</h4>
+        <div class="lista-vendedores">
+            <div class="vendedor">
+             <div class="vendedor-imagem" style="background:url('../static/images/laurococo.png') center/cover no-repeat;"></div>
+                <div>Lauro Coco</div>   
+            </div>
+            <div class="vendedor">
+             <div class="vendedor-imagem" style="background:url('../static/images/cleiton-diversos.jpg') center/cover no-repeat;"></div>
+                <div>Cleiton Diversos</div>   
+            </div>
+            <div class="vendedor">
+                <div class="vendedor-imagem" style="background:url('../static/images/licadoce.jpg') center/cover no-repeat;"></div>
+                   <div>Lica Doce</div>   
+            </div> 
+        </div>
+    </div>
+</div>
 </div>
 {% endblock content %}

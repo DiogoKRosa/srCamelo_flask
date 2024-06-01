@@ -6,7 +6,7 @@ from bson import json_util
 from uuid import uuid4
 import os
 
-idTeste = '664414764e592646aae62ac3'
+idTeste = '66593d66d7f92934d20c2ff0'
 def init_app(app):
     """ @app.before_request
     def check_session():
@@ -129,6 +129,12 @@ def init_app(app):
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
         produtos = list(Produto.selectByVendedor(idTeste))
+        
+        try:
+            Pid = produtos[-1]['id']
+        except:
+            Pid = 0
+
         categorias = list(Categoria.find())
         idBanco = [int(res['id']) for res in produtos]
         
@@ -188,4 +194,5 @@ def init_app(app):
             for x in deletar:
                 Produto.delete(x, idTeste)
             return redirect(url_for('inicio_vendedor'))
-        return render_template('produtos.html', produtos=produtos, categorias=categorias)
+        
+        return render_template('produtos.html', produtos=produtos, categorias=categorias, Pid=Pid)

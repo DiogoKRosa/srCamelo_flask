@@ -419,7 +419,7 @@ h2, h3, h4{
     text-align: left;
     font-size: 12px;
 }
-.img-produto-vendedor{
+.img-produto-vendedor, .vendedor-imagem{
     width: 142px;
     height: 92px;
     border-radius: 10px;
@@ -481,4 +481,31 @@ h2, h3, h4{
         filter: brightness(0) saturate(100%) invert(99%) sepia(1%) saturate(2995%) hue-rotate(212deg) brightness(113%) contrast(101%);
     }
     cursor:pointer
+}
+
+.lista-vendedores{
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+}
+.lista-vendedores>.vendedor{
+    font-size: 12px;
+    width: fit-content;
+    text-align: center;
+}
+.lista-vendedores>.vendedor:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+.lista-vendedores>.vendedor>.vendedor-imagem{
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    width: 120px;
+    height: 70px;
+    border-radius: 10px;
+}
+
+.dados-vendedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

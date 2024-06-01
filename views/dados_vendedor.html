@@ -1,6 +1,43 @@
 {% extends 'navbar_vendedor.html' %}
 {% block content %}
 <div class="content">
-    
+    <form action="" class="dados-vendedor">
+        <div class="inputs-dados">
+            
+        </div>
+        <div class="select_formaPag">
+            <h4>Selecione as formas de pagamento:</h4>
+            <div class="check_formaPag">
+                <div class="option_formaPag">
+                    <input type="checkbox" value="dinheiro" id="opt_dinheiro" name="forma_pagamento">
+                    <span class="checkmark" onclick="checkBox('#opt_dinheiro')">
+                        <img src="{{url_for('static', filename='/images/dinheiro_icon.svg')}}" alt="">
+                    </span>
+                    <label for="opt_dinheiro">Dinheiro</label>
+                </div>
+                <div class="option_formaPag">
+                    <input type="checkbox" value="debito" id="opt_debito" name="forma_pagamento">
+                    <span class="checkmark" onclick="checkBox('#opt_debito')">
+                        <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
+                    </span>
+                    <label for="opt_debito">Débito</label>
+                </div>
+                <div class="option_formaPag">
+                    <input type="checkbox" value="credito" id="opt_credito" name="forma_pagamento">
+                    <span class="checkmark" onclick="checkBox('#opt_credito')">
+                        <img src="{{url_for('static', filename='/images/cartao_icon.svg')}}" alt="">
+                    </span>
+                    <label for="opt_credito">Crédito</label>
+                </div>
+                <div class="option_formaPag">
+                    <input type="checkbox" value="pix" id="opt_pix" name="forma_pagamento">
+                    <span class="checkmark" onclick="checkBox('#opt_pix')">
+                        <img src="{{url_for('static', filename='/images/pix_icon.svg')}}" alt="">
+                    </span>
+                    <label for="opt_pix">Pix</label>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock content %}

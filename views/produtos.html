@@ -2,7 +2,7 @@
 {%block content%}
 <div class="content">
     <form class="lista-produtos" id="lista-produtos" action="{{url_for('produtos')}}" method="POST" enctype="multipart/form-data">
-        <input type="number" name="qtde" value="{{produtos[-1]['id']}}" id="qtde-produtos" hidden>
+        <input type="number" name="qtde" value="{{Pid}}" id="qtde-produtos" hidden>
 
         {%for produto in produtos%}
         <div class="produto" id="produto-{{produto['id']}}">
@@ -33,7 +33,7 @@
     </div>
 </div>
 <script>
-    num = {{produtos[-1]['id']}}
+    num = {{Pid}}
     function addInputProduto(){
         num++
         lista = window.document.getElementById('lista-produtos')
