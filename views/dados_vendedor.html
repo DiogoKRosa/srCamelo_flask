@@ -3,7 +3,32 @@
 <div class="content">
     <form action="" class="dados-vendedor">
         <div class="inputs-dados">
-            
+            <div class="input-dado">
+                <label for="">Nome:</label>
+                <input type="text" value="José Lanches">
+            </div>
+            <div class="input-dado">
+                <label for="">CPF:</label>
+                <input type="text" value="111.222.333-44">
+            </div>
+            <div class="input-dado">
+                <label for="">Email:</label>
+                <input type="text" value="jose.lanches@gmail.com">
+            </div>
+            <div class="input-dado">
+                <label for="">Telefone:</label>
+                <input type="text" value="(11) 11111-9999">
+            </div>
+            <div class="input-dado">
+                <label for="">País:</label>
+                <input type="text" value="Brasil" id="pais">
+                <label for="">UF:</label>
+                <input type="text" value="SP" id="estado">
+            </div>
+            <div class="input-dado">
+                <label for="">Cidade:</label>
+                <input type="text" value="Pariquera">
+            </div>
         </div>
         <div class="select_formaPag">
             <h4>Selecione as formas de pagamento:</h4>
@@ -38,6 +63,15 @@
                 </div>
             </div>
         </div>
+
+        <div class="banner-template">
+            <div class="img-banner-default" id="img-banner-default" style="background: url('../static/images/hot-dog-grande.jpg') center/cover no-repeat;">
+                <input type="file" name="imagem_loja" id="imagem_loja" accept="image/*" onchange="showImg(event, '#img-banner-default')" hidden>
+            </div>
+            <button type="button" onclick="openFile('#imagem_loja')">Alterar Foto</button>
+        </div>
+
+        <button>Finalizar</button>
     </form>
 </div>
 {% endblock content %}

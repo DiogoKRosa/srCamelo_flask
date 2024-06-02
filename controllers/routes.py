@@ -104,9 +104,21 @@ def init_app(app):
     def inicio_cliente():
         return render_template('inicio_consumidor.html')
     
+    @app.route('/vendedor/<int:id>', methods=['GET', 'POST'])
+    def pagina_vendedor(id=None):
+        return render_template('pagina_vendedor.html')
+    
+    @app.route('/vendedor/<int:id>/pedido', methods=['GET', 'POST'])
+    def pedido(id=None):
+        return render_template('pedido.html', titulo='José Lanches')
+    
+    @app.route('/vendedor/<int:id>/pagamento', methods=['GET', 'POST'])
+    def pagamento(id=None):
+        return render_template('pagamento.html', titulo='Pagamento')
+
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
-        return render_template('inicio_vendedor.html')
+        return render_template('inicio_vendedor.html', titulo='José Lanches')
     
     @app.route('/dados/vendedor')
     def dados_vendedor():
