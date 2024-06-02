@@ -135,7 +135,7 @@ def init_app(app):
             Usuario.editNomeFantasia(idTeste, request.form['nome_fantasia'])
             Usuario.editFormaPagamento(idTeste, request.form.getlist('forma_pagamento'))
             return redirect(url_for('produtos'))    
-        return render_template('primeiro_acesso.html')
+        return render_template('primeiro_acesso.html', titulo="Foto do Perfil")
     
     @app.route('/produtos', methods=['GET', 'POST'])
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])

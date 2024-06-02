@@ -1,5 +1,20 @@
 {% extends 'navbar.html' %}
 {% block content %}
+    <div class="tutorial">
+        <div class="modal">
+            <h3>Bem-vindo ao Sr. Camelô!</h3>
+            <p>Estamos animados para começar esta jornada juntos.</p>
+            <p>Nosso mascote está pronto para apresentar o aplicativo.</p>
+            <div class="img-modal">
+                <button class="back"></button>
+                <img src="" alt="">
+                <button class="advance"></button>
+            </div>
+            <p>Clique nas setas para prosseguir com o tutorial!</p>
+            <p>Se você já conehce o nosso app, você também pode clicar no botão "Pular" abaixo.</p>
+        </div>
+        <button type="button" class="modal-btn">Pular</button>
+    </div>
     <div class="content">
         <form action="{{url_for('primeiro_acesso')}}" method="post" enctype="multipart/form-data" id="cadPrimeiroAcesso">
             <div class="primeiro_acesso">

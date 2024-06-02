@@ -1,8 +1,40 @@
 {% extends 'navbar.html'%}
 {% block content %}
 <div class="content">
-    <div class="lista-pedido">
-        <div class="total"></div>
+    <div class="centralizar">
+        <div class="pagamento">
+            <div class="lista-pedido">
+                <h3>Total</h3><h3 style="text-align: end;">R$30,00</h3>
+                <div>1x Dogão</div><div style="text-align: end;">R$ 9,00</div>
+                <div>1x Pizza</div><div style="text-align: end;">R$ 12,00</div>
+                <div>1x Laranjinha</div><div style="text-align: end;">R$ 9,00</div>
+            </div>
+            <hr>
+            <div class="cupom">
+                <div>Digite o cupom de desconto</div>
+                <input type="text" placeholder="Exemplo: CAMELO10">
+                <button type="button">Aplicar Cupom</button>
+            </div>
+            <hr>
+            <div class="forma-pagamento">
+                <h3>Pagamento</h3>
+                <p>Escolher forma de pagamento</p>
+                <div>
+                    <div class="opcao">
+                        <img src="{{url_for('static', filename='/images/cartao_verde.svg')}}" alt="">
+                        Débito
+                    </div>
+                    <div class="opcao">
+                        <img src="{{url_for('static', filename='/images/cartao_verde.svg')}}" alt="">
+                        Crédito
+                    </div>
+                    <div class="opcao">
+                        <img src="{{url_for('static', filename='/images/pix_verde.svg')}}" alt="">
+                        Pix
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content%}
