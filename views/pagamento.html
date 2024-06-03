@@ -4,10 +4,10 @@
     <div class="centralizar">
         <div class="pagamento">
             <div class="lista-pedido">
-                <h3>Total</h3><h3 style="text-align: end;">R$30,00</h3>
-                <div>1x Dogão</div><div style="text-align: end;">R$ 9,00</div>
-                <div>1x Pizza</div><div style="text-align: end;">R$ 12,00</div>
-                <div>1x Laranjinha</div><div style="text-align: end;">R$ 9,00</div>
+                <h3>Total</h3><h3 style="text-align: end;">R${{pedido['total']}}</h3>
+                {% for produto in pedido['produto']%}
+                <div>{{produto['qtde']}}x {{produto['nome']}}</div><div style="text-align: end;">R$ {{produto['preco']}}</div>
+                {% endfor %}
             </div>
             <hr>
             <div class="cupom">

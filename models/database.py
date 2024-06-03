@@ -148,5 +148,13 @@ class Pedido():
     @staticmethod
     def selectTodosPedidos():
         return mongo.db.pedidos.find()
+    
+    @staticmethod
+    def selectPedidoAgora(id):
+        return mongo.db.pedidos.find_one({'id': id})
+    
+    @staticmethod
+    def selectPedido(id):
+        return mongo.db.pedidos.find_one({'_id': ObjectId(id)})
 
     

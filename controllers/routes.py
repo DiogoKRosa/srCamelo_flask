@@ -166,13 +166,17 @@ def init_app(app):
                 forma_pagamento = 'Pendente'
             )
             novo.save()
-            return redirect(url_for('pedido', id=vendedor['_id']))
+
+            idPedido = Pedido.selectPedidoAgora(count)
+            return redirect(url_for('pagamento', id=vendedor['_id'], idPedido = idPedido['_id']))
         
         return render_template('pedido.html', titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos)
     
-    @app.route('/vendedor/<id>/pagamento', methods=['GET', 'POST'])
-    def pagamento(id=None):
-        return render_template('pagamento.html', titulo='Pagamento')
+    @app.route('/vendedor/<id>/pagamento/<idPedido>', methods=['GET', 'POST'])
+    def pagamento(id=None, idPedido=None):
+        idPedido = '665da76dc2a7a806ff3e0bb0'
+        pedido = Pedido.selectPedido(idPedido)
+        return render_template('pagamento.html', titulo='Pagamento', pedido=pedido)
 
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
