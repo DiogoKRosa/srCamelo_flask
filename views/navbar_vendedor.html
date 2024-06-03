@@ -21,15 +21,15 @@
         <div class="menu-content" id="menu-content" hidden>
             <img class="menu" src ="{{url_for('static', filename='images/close_icon.svg')}}" onclick="closeMenu()">
             <div class="perfil-logado">
-                <img src="{{url_for('static', filename='images/perfil_vendedor.png')}}">
-                <h2 style="color: #ffffff;">José Lanches</h2>
+                <img src="{{url_for('static', filename='/uploads/'+vendedor['imagem_loja'])}}">
+                <h2 style="color: #ffffff;">{{vendedor['nome']}}</h2>
             </div>
             <div class="links">
                 <a href="">Mapa</a>
-                <a href="">Menu Principal</a>
+                <a href="{{url_for('inicio_vendedor')}}">Menu Principal</a>
                 <a href="">Vendas</a>
-                <a href="">Dados Cadastrais</a>
-                <a href="">Produtos</a>
+                <a href="{{url_for('dados_vendedor')}}">Dados Cadastrais</a>
+                <a href="/produtos">Produtos</a>
                 <a href="">Sobre</a>
                 <a href="">Sair</a>
             </div>

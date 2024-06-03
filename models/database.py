@@ -36,7 +36,11 @@ class Usuario():
             'forma_pagamento': self.forma_pagamento,
             'imagem_loja': self.imagem_loja
         })
-        
+
+    @staticmethod
+    def trazerDados(id):
+        return mongo.db.usuarios.find_one({'_id': ObjectId(id)})
+    
     @staticmethod
     def trazerLogin(email):
         select = mongo.db.usuarios.find_one({'email': email})

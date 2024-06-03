@@ -21,29 +21,32 @@ def init_app(app):
             email = request.form['email']
             senha = request.form['senha']
             user = Usuario.trazerLogin(email)
-            print(user)
+            #print(user)
             if user and check_password_hash(user['senha'], senha):
-                print('usuario_encontrado')
+                #print('usuario_encontrado')
                 oid = str(user['_id'])
-                print(oid)
+                #print(oid)
                 session['user_id'] = oid
-                print(session['user_id'])
+                #print(session['user_id'])
                 session['email'] = user['email']
-                print(session['email'])
+                #print(session['email'])
                 if(user['tipo'] == 'Cliente'):
                     print('inicio_cliente')
                     return redirect(url_for('inicio_cliente'))
                 elif(user['tipo'] == 'Vendedor'):
                     if Produto.selectByVendedor(session['user_id']):
-                        print('primeiro_acesso')
-                        return redirect(url_for('primeiro_acesso'))
-                    else:
                         print('inicio_vendedor')
                         return redirect(url_for('inicio_vendedor'))
+                    else:
+                        print('primeiro_acesso')
+                        return redirect(url_for('primeiro_acesso'))
+                        
             else:
                 flash("Usuário ou senha incorretos")
         return render_template('index.html')
-    
+    @app.route('/sair')
+    def sair():
+        
     @app.route('/cadastro')
     def cadastro():
         return render_template('cadastro.html')
@@ -125,7 +128,11 @@ def init_app(app):
 
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
-        return render_template('inicio_vendedor.html', titulo='José Lanches')
+        vendedor = Usuario.trazerDados(session['user_id'])
+        #print(vendedor)
+        produtos = Produto.selectByVendedor(session['user_id'])
+        #print(produtos)
+        return render_template('inicio_vendedor.html', titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos)
     
     @app.route('/dados/vendedor')
     def dados_vendedor():
