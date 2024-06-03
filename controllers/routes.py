@@ -1,10 +1,11 @@
 from flask import render_template, request, redirect, url_for, flash, session
-from models.database import Usuario, Produto, Categoria
+from models.database import Usuario, Produto, Categoria, Pedido
 from markupsafe import Markup
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import json_util, ObjectId
 from uuid import uuid4
 import os
+from datetime import datetime
 
 def init_app(app):
     @app.before_request
@@ -30,6 +31,8 @@ def init_app(app):
                 #print(session['user_id'])
                 session['email'] = user['email']
                 #print(session['email'])
+                session['nome'] = user['nome']
+                session['telefone'] = user['telefone']
                 if(user['tipo'] == 'Cliente'):
                     print('inicio_cliente')
                     return redirect(url_for('inicio_cliente'))
@@ -142,9 +145,27 @@ def init_app(app):
                     continue
                 else:
                     lista_pedido.append({'id':id_produto, 'nome':nome_produto, 'qtde':qtde_produto,'preco':preco_produto})
-                
-            
-
+            dataagora = datetime.now()
+            select = Pedido.selectTodosPedidos()
+            count = 0
+            for pedido in select:
+                count = count + 1
+            print(count)
+            novo = Pedido(
+                id = count,
+                status = 'Realizando',
+                data = dataagora.strftime('%d/%m/%Y'),
+                id_cliente = session['user_id'],
+                cliente = session['nome'],
+                cliente_telefone = session['telefone'],
+                id_vendedor = str(vendedor['_id']),
+                vendedor = vendedor['nome'],
+                vendedor_telefone = vendedor['telefone'],
+                total = request.form['total-pedido'],
+                produtos = lista_pedido,
+                forma_pagamento = 'Pendente'
+            )
+            novo.save()
             return redirect(url_for('pedido', id=vendedor['_id']))
         
         return render_template('pedido.html', titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos)

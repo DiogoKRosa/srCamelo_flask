@@ -118,16 +118,16 @@ class Categoria():
 class Pedido():
     def __init__(self, id, status, data, id_cliente, cliente, cliente_telefone, id_vendedor, vendedor, vendedor_telefone, total, produtos, forma_pagamento):
         self.id = id
-        self.status = status,
-        self.data = data,
-        self.id_cliente = id_cliente,
-        self.cliente = cliente,
-        self.cliente_telefone = cliente_telefone,
-        self.id_vendedor = id_vendedor,
-        self.vendedor = vendedor,
-        self.vendedor_telefone = vendedor_telefone,
-        self.total = total,
-        self.produtos = produtos,
+        self.status = status
+        self.data = data
+        self.id_cliente = id_cliente
+        self.cliente = cliente
+        self.cliente_telefone = cliente_telefone
+        self.id_vendedor = id_vendedor
+        self.vendedor = vendedor
+        self.vendedor_telefone = vendedor_telefone
+        self.total = total
+        self.produtos = produtos
         self.forma_pagamento = forma_pagamento
     
     def save(self):
@@ -145,5 +145,8 @@ class Pedido():
             'produto': self.produtos,
             'forma_pagamento': self.forma_pagamento
         })
+    @staticmethod
+    def selectTodosPedidos():
+        return mongo.db.pedidos.find()
 
     
