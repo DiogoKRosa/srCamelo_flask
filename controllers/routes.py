@@ -117,11 +117,15 @@ def init_app(app):
     def inicio_cliente():
         return render_template('inicio_consumidor.html')
     
-    @app.route('/vendedor/<int:id>', methods=['GET', 'POST'])
+    @app.route('/vendedor/<id>', methods=['GET', 'POST'])
     def pagina_vendedor(id=None):
-        return render_template('pagina_vendedor.html')
+        vendedor = Usuario.trazerDados(id)
+        #print(vendedor)
+        produtos = Produto.selectByVendedor(id)
+        #print(produtos)
+        return render_template('pagina_vendedor.html',  titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos)
     
-    @app.route('/vendedor/<int:id>/pedido', methods=['GET', 'POST'])
+    @app.route('/vendedor/<id>/pedido', methods=['GET', 'POST'])
     def pedido(id=None):
         return render_template('pedido.html', titulo='José Lanches')
     

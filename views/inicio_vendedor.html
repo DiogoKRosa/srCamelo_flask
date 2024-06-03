@@ -1,60 +1,60 @@
 {% extends 'navbar_vendedor.html' %}
 {% block content %}
 <div class="content">
-<div class="pag-vendedor">
-    <div class="informacoes-vendedor">
-        <div class="banner" style="background: url('../static/uploads/{{vendedor['imagem_loja']}}') center/cover no-repeat"></div>
-        <div class="texto">
-            <p>Telefone: {{vendedor['telefone']}}</p>
-            <p>E-mail: {{vendedor['email']}}</p>
-        </div>
-    </div>
-    <div class="produtos-vendedor">
-        <h3>Produtos disponíveis</h3>
-        {% for produto in produtos%}
-        <div class="produto">
-            <div class="img-produto-vendedor" style="background: url('../static/uploads/{{produto['imagem']}}') center/cover no-repeat"></div>
-            <div class="inf-produto-vendedor">
-                <p style="font-size: 16px; margin-top:0;">{{produto['nome']}}</p>
-                <p>Preço: R${{produto['preco']}}</p>
-                <p style="width: 188px;">{{produto['descricao']}}</p>
+    <div class="pag-vendedor">
+        <div class="informacoes-vendedor">
+            <div class="banner" style="background: url('../static/uploads/{{vendedor['imagem_loja']}}') center/cover no-repeat"></div>
+            <div class="texto">
+                <p>Telefone: {{vendedor['telefone']}}</p>
+                <p>E-mail: {{vendedor['email']}}</p>
             </div>
         </div>
-        {%endfor%}
-    </div>
-    <div class="pagamento-vendedor">
-        <h3>Tipos de pagamentos aceitos</h3>
-        <div>
-            {% if 'dinheiro' in vendedor['forma_pagamento']%}
-            <div class="opcao">
-                <img src="../static/images/dinheiro_laranja.svg">
-                Dinheiro
+        <div class="produtos-vendedor">
+            <h3>Produtos disponíveis</h3>
+            {% for produto in produtos%}
+            <div class="produto">
+                <div class="img-produto-vendedor" style="background: url('../static/uploads/{{produto['imagem']}}') center/cover no-repeat"></div>
+                <div class="inf-produto-vendedor">
+                    <p style="font-size: 16px; margin-top:0;">{{produto['nome']}}</p>
+                    <p>Preço: R${{produto['preco']}}</p>
+                    <p style="width: 188px;">{{produto['descricao']}}</p>
+                </div>
             </div>
-            {% endif %}
-            {% if 'debito' in vendedor['forma_pagamento']%}
-            <div class="opcao">
-                <img src="../static/images/cartao_laranja.svg">
-                Débito
+            {%endfor%}
+        </div>
+        <div class="pagamento-vendedor">
+            <h3>Tipos de pagamentos aceitos</h3>
+            <div>
+                {% if 'dinheiro' in vendedor['forma_pagamento']%}
+                <div class="opcao">
+                    <img src="../static/images/dinheiro_laranja.svg">
+                    Dinheiro
+                </div>
+                {% endif %}
+                {% if 'debito' in vendedor['forma_pagamento']%}
+                <div class="opcao">
+                    <img src="../static/images/cartao_laranja.svg">
+                    Débito
+                </div>
+                {% endif %}
+                {% if 'credito' in vendedor['forma_pagamento']%}
+                <div class="opcao">
+                    <img src="../static/images/cartao_laranja.svg">
+                    Crédito
+                </div>
+                {% endif %}
+                {% if 'pix' in vendedor['forma_pagamento']%}
+                <div class="opcao">
+                    <img src="../static/images/pix_laranja.svg">
+                    Pix
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
-            {% if 'credito' in vendedor['forma_pagamento']%}
-            <div class="opcao">
-                <img src="../static/images/cartao_laranja.svg">
-                Crédito
-            </div>
-            {% endif %}
-            {% if 'pix' in vendedor['forma_pagamento']%}
-            <div class="opcao">
-                <img src="../static/images/pix_laranja.svg">
-                Pix
-            </div>
-            {% endif %}
+        </div>
+        <div class="botoes">
+            <button type="button" onclick="window.location.href='/produtos'">Produtos</button>
+            <button type="button">Vendas</button>
         </div>
     </div>
-    <div class="botoes">
-        <button type="button" onclick="window.location.href='/produtos'">Produtos</button>
-        <button type="button">Vendas</button>
-    </div>
-</div>
 </div>
 {% endblock content %}
