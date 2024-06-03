@@ -27,15 +27,15 @@
             <img class="menu" src="{{url_for('static', filename='images/close_icon.svg')}}" onclick="closeMenu()">
             <div class="perfil-logado">
                 <img src="{{url_for('static', filename='images/perfil.png')}}">
-                <h2 style="color: #ffffff;">Daniel</h2>
+                <h2 style="color: #ffffff;">{{usuario['nome']}}</h2>
             </div>
             <div class="links">
-                <a href="">Menu Principal</a>
+                <a href="url_for('inicio_cliente')">Menu Principal</a>
                 <a href="">Pedidos</a>
                 <a href="">Dados Cadastrais</a>
                 <a href="">Cartões</a>
                 <a href="">Sobre</a>
-                <a href="">Sair</a>
+                <a href="url_for('sair')">Sair</a>
             </div>
         </div>
         {% block content %}

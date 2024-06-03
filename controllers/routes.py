@@ -118,7 +118,8 @@ def init_app(app):
     
     @app.route('/inicio/cliente')
     def inicio_cliente():
-        return render_template('inicio_consumidor.html')
+        usuario = Usuario.trazerDados(session['user_id'])
+        return render_template('inicio_consumidor.html', usuario = usuario)
     
     @app.route('/vendedor/<id>', methods=['GET', 'POST'])
     def pagina_vendedor(id=None):
@@ -174,7 +175,6 @@ def init_app(app):
     
     @app.route('/vendedor/<id>/pagamento/<idPedido>', methods=['GET', 'POST'])
     def pagamento(id=None, idPedido=None):
-        idPedido = '665da76dc2a7a806ff3e0bb0'
         pedido = Pedido.selectPedido(idPedido)
         return render_template('pagamento.html', titulo='Pagamento', pedido=pedido)
     
