@@ -44,9 +44,12 @@ def init_app(app):
             else:
                 flash("Usuário ou senha incorretos")
         return render_template('index.html')
+    
     @app.route('/sair')
     def sair():
-        
+        session.clear()
+        return redirect(url_for('index'))
+    
     @app.route('/cadastro')
     def cadastro():
         return render_template('cadastro.html')
