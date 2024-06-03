@@ -115,6 +115,31 @@ class Categoria():
     def find():
         return mongo.db.categorias.find()
 
+class Pedido():
+    def __init__(self, id, status, data, cliente, cliente_telefone, vendedor, vendedor_telefone, total, produtos, forma_pagamento):
+        self.id = id
+        self.status = status,
+        self.data = data,
+        self.cliente = cliente,
+        self.cliente_telefone = cliente_telefone,
+        self.vendedor = vendedor,
+        self.vendedor_telefone = vendedor_telefone,
+        self.total = total,
+        self.produtos = produtos,
+        self.forma_pagamento = forma_pagamento
     
+    def save(self):
+        mongo.db.pedidos.insert_one({
+            'id': self.id,
+            'status': self.status,
+            'data': self.data,
+            'cliente': self.cliente,
+            'cliente_telefone': self.cliente_telefone,
+            'vendedor': self.vendedor,
+            'vendedor_telefone': self.vendedor_telefone,
+            'total': self.total,
+            'produto': self.produtos,
+            'forma_pagamento': self.forma_pagamento
+        })
 
     
