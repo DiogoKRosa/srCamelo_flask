@@ -2,7 +2,47 @@
 {% block content %}
 <div class="content">
     <div class="centralizar">
-        <div class="pedido-bloco"></div>
+        <div class="compras">
+            {% for pedido in pedidos %}
+            <div class="pedido-bloco">
+                <div class="escondido">
+                    <div class="texto-esquerda">
+                        <div>
+                            <div style="font-size: 14px;">Id:{{pedido['id']}}</div> <div style="color:#FF6700 ;">{{pedido['status']}}</div>
+                        </div>
+                        <div>Vendedor: {{pedido['vendedor']}}</div>
+                        <div>Tel: {{pedido['vendedor_telefone']}}</div>
+                    </div>
+                    <div class="texto-direita">
+                        <div>{{pedido['data']}}</div>
+                        <div>Total: R$ {{pedido['total']}}</div>
+                        <div style="color: #5CAC0E;" onclick="expandir({{pedido['id']}})">Detalhes ></div>
+                    </div>
+                </div>
+                <div class="expandido" id="expandido-{{pedido['id']}}" style="display: none; padding-bottom: 20px;">
+                    <div class="centralizar">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <p>Pedido</p>
+                            {%for produto in pedido['produto']%}
+                            <p>{{produto['nome']}} - {{produto['qtde']}} un - R${{produto['preco']}}</p>
+                            {% endfor %}
+                        </div>
+                        <button type="button" class="btn-pedido">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
+<script>
+    function expandir(id){
+        div  = document.getElementById(`expandido-${id}`)
+        if(div.style.display == 'none'){
+            div.style.display = 'block'
+        }else{
+            div.style.display = 'none'
+        }
+    }
+</script>
 {% endblock content %}

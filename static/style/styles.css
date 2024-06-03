@@ -664,3 +664,44 @@ hr{
 .back, .advance{
     cursor: pointer;
 }
+
+.compras{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.pedido-bloco{
+    width: 342px;
+    height: fit-content;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: #CEDCA7 1px solid;
+    font-size: 10px;
+}
+.pedido-bloco>.escondido{
+    display: grid;
+    height: 91px;
+    grid-template-columns: auto  auto;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.pedido-bloco>.escondido>.texto-esquerda{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.pedido-bloco>.escondido>.texto-direita{
+   text-align: right;
+   display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.btn-pedido{
+    width: 147px;
+    height: 33px;
+    border-radius: 10px;
+    font-size: 10px;
+}

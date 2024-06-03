@@ -10,7 +10,7 @@ from datetime import datetime
 def init_app(app):
     @app.before_request
     def check_session():
-        routes = ['index', 'cadastro','cadastro_consumidor', 'cadastro_vendedor']
+        routes = ['index', 'cadastro','cadastro_consumidor', 'cadastro_vendedor', 'compras']
         if request.endpoint in routes or request.path.startswith('/static/'):
             return
         if 'user_id' not in session:
@@ -196,7 +196,8 @@ def init_app(app):
     
     @app.route('/compras', methods=['GET', 'POST'])
     def compras():
-        return render_template('compras.html')
+        pedidos = Pedido.selectCompras(session['user_id'])
+        return render_template('compras.html', titulo ='Pedidos', pedidos=pedidos)
 
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
