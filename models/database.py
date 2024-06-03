@@ -171,3 +171,7 @@ class Pedido():
     @staticmethod
     def selectCompras(id):
         return mongo.db.pedidos.find({'id_cliente':id})
+    
+    @staticmethod
+    def selectVendas(id):
+        return mongo.db.pedidos.find({'id_vendedor':id})

@@ -212,6 +212,11 @@ def init_app(app):
     def dados_vendedor():
         return render_template('dados_vendedor.html')
 
+    @app.route('/vendas')
+    def vendas():
+        pedidos = Pedido.selectVendas(session['user_id'])
+        return render_template('vendas.html', titulo='Vendas', pedidos=pedidos)
+
     @app.route('/primeiro-acesso', methods=['GET', 'POST'])
     def primeiro_acesso():
         if request.method == 'POST':
