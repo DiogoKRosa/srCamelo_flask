@@ -2,19 +2,18 @@ from flask import render_template, request, redirect, url_for, flash, session
 from models.database import Usuario, Produto, Categoria
 from markupsafe import Markup
 from werkzeug.security import generate_password_hash, check_password_hash
-from bson import json_util
+from bson import json_util, ObjectId
 from uuid import uuid4
 import os
 
-idTeste = '66593d66d7f92934d20c2ff0'
 def init_app(app):
-    """ @app.before_request
+    @app.before_request
     def check_session():
-        routes = ['index', 'cadastro_consumidor', 'cadastro_vendedor']
+        routes = ['index', 'cadastro','cadastro_consumidor', 'cadastro_vendedor']
         if request.endpoint in routes or request.path.startswith('/static/'):
             return
         if 'user_id' not in session:
-            return redirect(url_for('index')) """
+            return redirect(url_for('index'))
 
     @app.route('/', methods=['GET', 'POST'])
     def index():
@@ -25,7 +24,9 @@ def init_app(app):
             print(user)
             if user and check_password_hash(user['senha'], senha):
                 print('usuario_encontrado')
-                session['user_id'] = json_util.dumps(user['_id'])
+                oid = str(user['_id'])
+                print(oid)
+                session['user_id'] = oid
                 print(session['user_id'])
                 session['email'] = user['email']
                 print(session['email'])
@@ -67,7 +68,10 @@ def init_app(app):
                 pais = request.form['pais'],
                 uf = request.form['uf'],
                 cidade = request.form['cidade'],
-                imagem = ''
+                imagem_perfil= '',
+                nome_fantasia = request.form['nome'],
+                forma_pagamento = [],
+                imagem_loja = ''
             )
             novoUsu.save()
             return redirect(url_for('index'))
@@ -94,7 +98,10 @@ def init_app(app):
                 pais = request.form['pais'],
                 uf = request.form['uf'],
                 cidade = request.form['cidade'],
-                imagem = ''
+                imagem_perfil= '',
+                nome_fantasia = request.form['nome'],
+                forma_pagamento = [],
+                imagem_loja = ''
             )
             novoUsu.save()
             return redirect(url_for('index'))
@@ -131,16 +138,16 @@ def init_app(app):
             nomeImagem = str(uuid4())
             imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
 
-            Usuario.editImagemLoja(idTeste, nomeImagem)
-            Usuario.editNomeFantasia(idTeste, request.form['nome_fantasia'])
-            Usuario.editFormaPagamento(idTeste, request.form.getlist('forma_pagamento'))
+            Usuario.editImagemLoja(session['user_id'], nomeImagem)
+            Usuario.editNomeFantasia(session['user_id'], request.form['nome_fantasia'])
+            Usuario.editFormaPagamento(session['user_id'], request.form.getlist('forma_pagamento'))
             return redirect(url_for('produtos'))    
         return render_template('primeiro_acesso.html', titulo="Foto do Perfil")
     
     @app.route('/produtos', methods=['GET', 'POST'])
     @app.route('/primeiro-acesso/produtos', methods=['GET', 'POST'])
     def produtos():
-        produtos = list(Produto.selectByVendedor(idTeste))
+        produtos = list(Produto.selectByVendedor(session['user_id']))
         
         try:
             Pid = produtos[-1]['id']
@@ -172,7 +179,7 @@ def init_app(app):
                 imagem = request.files[f'imagem_produto-{x}']
                 nomeImagem = str(uuid4())
                 imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
-                novo = Produto(id_vendedor=idTeste, 
+                novo = Produto(id_vendedor=session['user_id'], 
                                id=request.form[f'id_produto-{x}'],
                                nome=request.form[f'nome_produto-{x}'],
                                preco=request.form[f'preco_produto-{x}'],
@@ -192,19 +199,19 @@ def init_app(app):
                     nomeImagem = str(uuid4())
                     imagem.save(os.path.join(app.config['UPLOAD_FOLDER'], nomeImagem))
 
-                att = Produto(id_vendedor=idTeste,
+                att = Produto(id_vendedor=session['user_id'],
                               id=request.form[f'id_produto-{x}'],
                               nome=request.form[f'nome_produto-{x}'],
                               preco=request.form[f'preco_produto-{x}'],
                               descricao=request.form[f'descricao_produto-{x}'],
                               categoria=request.form.get(f'categoria_produto-{x}'),
                               imagem=nomeImagem)
-                Produto.update(att, x, idTeste)
+                Produto.update(att, x, session['user_id'])
             
             
             #Deleta produto do banco
             for x in deletar:
-                Produto.delete(x, idTeste)
+                Produto.delete(x, session['user_id'])
             return redirect(url_for('inicio_vendedor'))
         
         return render_template('produtos.html', produtos=produtos, categorias=categorias, Pid=Pid)

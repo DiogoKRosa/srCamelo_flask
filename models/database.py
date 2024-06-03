@@ -1,5 +1,5 @@
 from flask_pymongo import PyMongo
-from bson import ObjectId, json_util
+from bson import ObjectId
 from flask import jsonify
 
 mongo = PyMongo()
