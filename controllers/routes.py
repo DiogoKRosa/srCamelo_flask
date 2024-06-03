@@ -131,7 +131,21 @@ def init_app(app):
         produtos = Produto.selectByVendedor(id)
 
         if request.method == 'POST':
-            print(request.form)
+            lista_pedido = []
+            for produto in produtos:
+                id=produto['id']
+                id_produto = request.form[f'produto-id-{id}']
+                nome_produto = request.form[f'produto-nome-{id}']
+                qtde_produto = request.form[f'produto-qtde-{id}']
+                preco_produto = request.form[f'produto-preco-{id}']
+                if int(qtde_produto) == 0:
+                    continue
+                else:
+                    lista_pedido.append({'id':id_produto, 'nome':nome_produto, 'qtde':qtde_produto,'preco':preco_produto})
+                
+            
+
+            return redirect(url_for('pedido', id=vendedor['_id']))
         
         return render_template('pedido.html', titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos)
     

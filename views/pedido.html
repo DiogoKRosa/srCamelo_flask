@@ -17,7 +17,7 @@
                         <button class="minus_btn" type="button" onclick="tirarProduto({{produto['id']}})">
                             <img src="{{url_for('static', filename='/images/minus.svg')}}">
                         </button>
-                        <input type="text" value="0" class="qtde" id="produto-qtde-{{produto['id']}}"  name='qtde-{{produto['id']}}'>
+                        <input type="text" value="0" class="qtde" id="produto-qtde-{{produto['id']}}"  name='produto-qtde-{{produto['id']}}'>
                         <button class="add_btn" type="button" onclick="adicionarProduto({{produto['id']}})">
                             <img src="{{url_for('static', filename='/images/plus.svg')}}">
                         </button>
