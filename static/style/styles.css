@@ -647,3 +647,18 @@ hr{
     height: 40px;
     border-radius: 10px;
 }
+.img-modal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.back, .advance{
+    cursor: pointer;
+}
+
+.back{
+    filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(0%) hue-rotate(186deg) brightness(97%) contrast(86%);
+}
