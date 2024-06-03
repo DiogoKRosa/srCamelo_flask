@@ -126,3 +126,72 @@ function enviarForm2(){
     }
     return form.submit()
 }
+
+passo=0
+function tutorial(acao){
+    div = document.querySelector('#tutorial')
+    if(acao == 'avancar'){
+        passo = passo + 1
+    }
+    if(acao == 'voltar'){
+        if(passo == 1){
+            return
+        }
+        passo = passo - 1
+    }
+
+    if(passo == 1){
+        div.innerHTML = `
+        <div class="modal" id="modal-tutorial">
+        
+        <h3>Bem-vindo ao Sr. Camelô!</h3>
+        <p>Estamos animados para começar esta jornada juntos.</p>
+        <p>Nosso mascote está pronto para apresentar o aplicativo.</p>
+        <div class="img-modal">
+            <img class="back" style="
+                filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(0%) hue-rotate(186deg) brightness(97%) contrast(86%);
+            " src="/static/images/back.svg">
+            <img src="/static/images/mascote.png" alt="">
+            <img class="advance" src="/static/images/advance.svg" onclick="tutorial('avancar')">
+        </div>
+        <p>Clique nas setas para prosseguir com o tutorial!</p>
+        <p>Se você já conhece o nosso app, você também pode clicar no botão "Pular" abaixo.</p>
+        </div>
+        <button type="button" class="modal-btn" onclick="esconderTutorial()">Pular</button>`
+    }else if (passo == 2) {
+        div.innerHTML = `
+        <div class="modal" id="modal-tutorial">
+        
+        <h3>Monte o perfil da sua loja!</h3>
+        <p>Adicione uma imagem que represente seu negócio. </p>
+        <p>Preencha com o nome da sua loja.</p>
+        <div class="img-modal">
+            <img class="back" style="filter: brightness(0) saturate(100%) invert(43%) sepia(85%) saturate(2798%) hue-rotate(3deg) brightness(105%) contrast(106%);" src="/static/images/back.svg" onclick="tutorial('voltar')">
+            <img src="/static/images/tutorial2.png" alt="">
+            <img class="advance" src="/static/images/advance.svg" onclick="tutorial('avancar')">
+        </div>
+        <p>Selecione as formas de pagamento que você aceitará.</p>
+        </div>
+        <button type="button" class="modal-btn" onclick="esconderTutorial()">Pular</button>`
+    }else if(passo == 3){
+        div.innerHTML = `
+        <div class="modal" id="modal-tutorial">
+        
+        <h3>Cadastre seus produtos</h3>
+        <p>Quando você clicar no botão 'Cadastrar Produtos', será direcionado para uma nova tela.</p>
+        <p> Você poderá preencher o nome do produto, o preço, uma breve descrição e a categoria à qual o produto pertence.</p>
+        <div class="img-modal">
+            <img class="back" style="filter: brightness(0) saturate(100%) invert(43%) sepia(85%) saturate(2798%) hue-rotate(3deg) brightness(105%) contrast(106%);" src="/static/images/back.svg" onclick="tutorial('voltar')">
+            <img src="/static/images/tutorial3.png" alt="">
+            <img class="advance" style="filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(0%) hue-rotate(186deg) brightness(97%) contrast(86%);" src="/static/images/advance.svg">
+        </div>
+        <p>Para adicionar mais produtos, clique no botão redondo com o símbolo de '+'. Para excluir um produto, basta clicar no ícone da lixeira.</p>
+        </div>
+        <button type="button" class="modal-btn" onclick="esconderTutorial()">Finalizar</button>`
+    }
+}
+
+function esconderTutorial(){
+    div = document.querySelector('#tutorial')
+    div.style.display='none'
+}

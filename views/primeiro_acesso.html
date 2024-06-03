@@ -1,20 +1,7 @@
 {% extends 'navbar.html' %}
 {% block content %}
-    <!-- <div class="tutorial">
-        <div class="modal">
-            <h3>Bem-vindo ao Sr. Camelô!</h3>
-            <p>Estamos animados para começar esta jornada juntos.</p>
-            <p>Nosso mascote está pronto para apresentar o aplicativo.</p>
-            <div class="img-modal">
-                <img class="back" src="{{url_for('static', filename='/images/back.svg')}}">
-                <img src="{{url_for('static', filename='/images/mascote.png')}}" alt="">
-                <img class="advance" src="{{url_for('static', filename='/images/advance.svg')}}">
-            </div>
-            <p>Clique nas setas para prosseguir com o tutorial!</p>
-            <p>Se você já conhece o nosso app, você também pode clicar no botão "Pular" abaixo.</p>
-        </div>
-        <button type="button" class="modal-btn">Pular</button>
-    </div> -->
+    <div class="tutorial" id="tutorial" style="display: none;">
+    </div>
     <div class="content">
         <form action="{{url_for('primeiro_acesso')}}" method="post" enctype="multipart/form-data" id="cadPrimeiroAcesso">
             <div class="primeiro_acesso">
@@ -64,4 +51,11 @@
             </div>
         </form>
     </div>
+    <script>
+        window.onload = function() {
+            div = window.document.querySelector('#tutorial')
+            div.style.display = 'flex'
+            tutorial('avancar')
+        }
+    </script>
 {% endblock content %}

@@ -658,7 +658,3 @@ hr{
 .back, .advance{
     cursor: pointer;
 }
-
-.back{
-    filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(0%) hue-rotate(186deg) brightness(97%) contrast(86%);
-}
