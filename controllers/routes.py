@@ -124,7 +124,8 @@ def init_app(app):
     @app.route('/inicio/cliente')
     def inicio_cliente():
         usuario = Usuario.trazerDados(session['user_id'])
-        return render_template('inicio_consumidor.html', usuario = usuario)
+        vendedor = Usuario.trazerVendedores()
+        return render_template('inicio_consumidor.html', usuario = usuario, vendedor=vendedor)
     
     @app.route('/vendedor/<id>', methods=['GET', 'POST'])
     def pagina_vendedor(id=None):

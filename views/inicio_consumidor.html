@@ -40,9 +40,9 @@
     <div class="vendedores-proximo">
         <h4>Vendedores Próximos</h4>
         <div class="lista-vendedores">
-            <div class="vendedor" onclick="location.href='{{url_for('pagina_vendedor', id='665de129a3858799b3aad367')}}'">
-                <div class="vendedor-imagem" style="background:url('../static/images/dogao.png') center/cover no-repeat;"></div>
-                <div>José Lanches</div>
+            <div class="vendedor" onclick="location.href='{{url_for('pagina_vendedor', id=vendedor['_id'])}}'">
+                <div class="vendedor-imagem" style="background:url('../static/uploads/{{vendedor['imagem_loja']}}') center/cover no-repeat;"></div>
+                <div>{{vendedor['nome']}}</div>
                 <div>500m</div>
             </div>
             <div class="vendedor">

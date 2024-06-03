@@ -46,6 +46,10 @@ class Usuario():
         select = mongo.db.usuarios.find_one({'email': email})
         return select
     
+    @staticmethod
+    def trazerVendedores():
+        return mongo.db.usuarios.find_one({'tipo': 'Vendedor'})
+    
     def editImagemLoja(id ,nomeImagem):
         filtro = {"_id": ObjectId(id)}
         update = {'$set':{"imagem_loja": nomeImagem}}
