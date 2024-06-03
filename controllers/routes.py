@@ -37,7 +37,12 @@ def init_app(app):
                     print('inicio_cliente')
                     return redirect(url_for('inicio_cliente'))
                 elif(user['tipo'] == 'Vendedor'):
-                    if Produto.selectByVendedor(session['user_id']):
+                    prod = Produto.selectByVendedor(session['user_id'])
+                    count = 0
+                    for produto in prod:
+                        count = count + 1
+                    print(count)
+                    if count>0:
                         print('inicio_vendedor')
                         return redirect(url_for('inicio_vendedor'))
                     else:
@@ -189,6 +194,10 @@ def init_app(app):
         pedido = Pedido.updatePedidoforma(id=idPedido, status='Pendente', forma=forma)
         return render_template('finalizado.html')
     
+    @app.route('/compras', methods=['GET', 'POST'])
+    def compras():
+        return render_template('compras.html')
+
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
         vendedor = Usuario.trazerDados(session['user_id'])

@@ -63,12 +63,14 @@
         total = 0 
         for (id_input of ids){
             id = id_input.value
-            preco = parseInt(document.getElementById(`produto-preco-${id}`).value)
-            qtde = parseInt(document.getElementById(`produto-qtde-${id}`).value)
+            preco = parseFloat(document.getElementById(`produto-preco-${id}`).value.replace(/,/, '.'))
+            qtde = parseFloat(document.getElementById(`produto-qtde-${id}`).value)
+            console.log(preco, qtde)
             total = total + (preco*qtde)
         }
         div.innerHTML = `R$${total}`
         input.value = total
+        console.log(total)
     }
     function enviarPedido(){
         form = document.getElementById('form-pedido')
