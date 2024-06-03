@@ -127,9 +127,15 @@ def init_app(app):
     
     @app.route('/vendedor/<id>/pedido', methods=['GET', 'POST'])
     def pedido(id=None):
-        return render_template('pedido.html', titulo='José Lanches')
+        vendedor = Usuario.trazerDados(id)
+        produtos = Produto.selectByVendedor(id)
+
+        if request.method == 'POST':
+            print(request.form)
+        
+        return render_template('pedido.html', titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos)
     
-    @app.route('/vendedor/<int:id>/pagamento', methods=['GET', 'POST'])
+    @app.route('/vendedor/<id>/pagamento', methods=['GET', 'POST'])
     def pagamento(id=None):
         return render_template('pagamento.html', titulo='Pagamento')
 

@@ -116,12 +116,14 @@ class Categoria():
         return mongo.db.categorias.find()
 
 class Pedido():
-    def __init__(self, id, status, data, cliente, cliente_telefone, vendedor, vendedor_telefone, total, produtos, forma_pagamento):
+    def __init__(self, id, status, data, id_cliente, cliente, cliente_telefone, id_vendedor, vendedor, vendedor_telefone, total, produtos, forma_pagamento):
         self.id = id
         self.status = status,
         self.data = data,
+        self.id_cliente = id_cliente,
         self.cliente = cliente,
         self.cliente_telefone = cliente_telefone,
+        self.id_vendedor = id_vendedor,
         self.vendedor = vendedor,
         self.vendedor_telefone = vendedor_telefone,
         self.total = total,
@@ -133,8 +135,10 @@ class Pedido():
             'id': self.id,
             'status': self.status,
             'data': self.data,
+            'id_cliente': self.id_cliente,
             'cliente': self.cliente,
             'cliente_telefone': self.cliente_telefone,
+            'id_vendedor': self.id_vendedor,
             'vendedor': self.vendedor,
             'vendedor_telefone': self.vendedor_telefone,
             'total': self.total,

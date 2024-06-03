@@ -2,66 +2,77 @@
 {% block content %}
 <div class="content">
     <div class="centralizar">
-        <form action="" class="pedido">
+        <form action="{{url_for('pedido', id=vendedor['_id'])}}" class="pedido" id="form-pedido" method="POST">
             <h3 style="">Seu pedido</h3>
+            {% for produto in produtos%}
             <div class="produto">
-                <div class="img-produto-vendedor" style="background: url({{url_for('static', filename='/images/dogao.png')}}) center/cover no-repeat"></div>
+                <div class="img-produto-vendedor" style="background: url({{url_for('static', filename='/uploads/'+produto['imagem'])}}) center/cover no-repeat"></div>
                 <div class="inf-produto-vendedor">
-                    <div>Dogão</div>
-                    <div id="preco">R$ 9,00</div>
+                    <div>{{produto['nome']}}</div>
+                    <div id="preco">R$ {{produto['preco']}}</div>
+                    <input type="text" class="input-ids" id="produto-id-{{produto['id']}}" name="produto-id-{{produto['id']}}" value="{{produto['id']}}" hidden>
+                    <input type="text" id="produto-nome-{{produto['id']}}" name="produto-nome-{{produto['id']}}" value="{{produto['nome']}}" hidden>
+                    <input type="text" class="preco" id="produto-preco-{{produto['id']}}" name="produto-preco-{{produto['id']}}" value="{{produto['preco']}}" hidden>
                     <div class="pedido-qtde">
-                        <button class="minus_btn" type="button">
+                        <button class="minus_btn" type="button" onclick="tirarProduto({{produto['id']}})">
                             <img src="{{url_for('static', filename='/images/minus.svg')}}">
                         </button>
-                        <input type="text" value="0">
-                        <button class="add_btn" type="button">
+                        <input type="text" value="0" class="qtde" id="produto-qtde-{{produto['id']}}"  name='qtde-{{produto['id']}}'>
+                        <button class="add_btn" type="button" onclick="adicionarProduto({{produto['id']}})">
                             <img src="{{url_for('static', filename='/images/plus.svg')}}">
                         </button>
                     </div>
                 </div>
             </div>
             <hr>
-            <div class="produto">
-                <div class="img-produto-vendedor" style="background: url({{url_for('static', filename='/images/pizza.png')}}) center/cover no-repeat"></div>
-                <div class="inf-produto-vendedor">
-                    <div>Pizza Calabresa</div>
-                    <div id="preco">R$ 12,00</div>
-                    <div class="pedido-qtde">
-                        <button class="minus_btn" type="button">
-                            <img src="{{url_for('static', filename='/images/minus.svg')}}">
-                        </button>
-                        <input type="text" value="0">
-                        <button class="add_btn" type="button">
-                            <img src="{{url_for('static', filename='/images/plus.svg')}}">
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="produto">
-                <div class="img-produto-vendedor" style="background: url({{url_for('static', filename='/images/laranjinha.png')}}) center/cover no-repeat"></div>
-                <div class="inf-produto-vendedor">
-                    <div>Laranjinha</div>
-                    <div id="preco">R$ 9,00</div>
-                    <div class="pedido-qtde">
-                        <button class="minus_btn" type="button">
-                            <img src="{{url_for('static', filename='/images/minus.svg')}}">
-                        </button>
-                        <input type="text" value="0">
-                        <button class="add_btn" type="button">
-                            <img src="{{url_for('static', filename='/images/plus.svg')}}">
-                        </button>
-                    </div>
-                </div>
-            </div>
+            {%endfor%}
+            
             <div class="centralizar">
                 <div class="total" style="margin-top: 15px; margin-bottom: 30px;">
                     <div style="color: #FF6700;">Total:</div>
-                    <div style="font-size: 20px;">R$30,00</div>
+                    <div style="font-size: 20px;" id="total-pedido-mostra">R$0</div>
+                    <input type="text" id="total-pedido" name="total-pedido" hidden>
                 </div>
-                <button type="button">Pagamento</button>
+                <button type="button" onclick="enviarPedido()">Pagamento</button>
             </div>
         </form>
     </div>
 </div>
+<script>
+    function adicionarProduto(id){
+        qtde = document.getElementById(`produto-qtde-${id}`)
+        atual = parseInt(qtde.value)
+        atual = atual+1
+        qtde.value = atual
+        atualizarTotal()
+    }
+    function tirarProduto(id){
+        qtde = document.getElementById(`produto-qtde-${id}`)
+        atual = parseInt(qtde.value)
+        atual = atual-1
+        if(atual < 0){
+            atual = 0
+        }
+        qtde.value = atual
+        atualizarTotal()
+    }
+    function atualizarTotal(){
+        div = document.getElementById('total-pedido-mostra')
+        input = document.getElementById('total-pedido')
+        ids = document.getElementsByClassName('input-ids')
+        total = 0 
+        for (id_input of ids){
+            id = id_input.value
+            preco = parseInt(document.getElementById(`produto-preco-${id}`).value)
+            qtde = parseInt(document.getElementById(`produto-qtde-${id}`).value)
+            total = total + (preco*qtde)
+        }
+        div.innerHTML = `R$${total}`
+        input.value = total
+    }
+    function enviarPedido(){
+        form = document.getElementById('form-pedido')
+        form.submit()
+    }
+</script>
 {% endblock content %}
