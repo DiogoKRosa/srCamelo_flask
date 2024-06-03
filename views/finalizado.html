@@ -2,7 +2,11 @@
 {% block content %}
 <div class="content">
     <div class="centralizar">
-        
+        <img src="/static/images/mascote-finalizado.png">
+        <h3>Compra finalizada com sucesso!</h3>
+        <p style="text-align: center;">Você já pode retirar o seu pedido com o vendedor. Clique no mapa para ver onde a loja está localizada</p>
+        <button style="margin-top: 113px;">Mapa</button>
+        <button style="margin-top: 20px;" onclick="location.href='{{url_for('inicio_cliente')}}'">Voltar para o menu</button>
     </div>
 </div>
 {% endblock content %}
