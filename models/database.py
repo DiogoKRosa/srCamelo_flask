@@ -145,6 +145,7 @@ class Pedido():
             'produto': self.produtos,
             'forma_pagamento': self.forma_pagamento
         })
+
     @staticmethod
     def selectTodosPedidos():
         return mongo.db.pedidos.find()
@@ -157,4 +158,9 @@ class Pedido():
     def selectPedido(id):
         return mongo.db.pedidos.find_one({'_id': ObjectId(id)})
 
+    def updatePedidoforma(id, status, forma):
+        filtro = {"_id": ObjectId(id)}
+        update = {'$set':{'status': status,
+                          'forma_pagamento': forma}}
+        mongo.db.pedidos.update_one(filtro, update)
     

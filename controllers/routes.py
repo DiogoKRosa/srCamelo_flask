@@ -177,7 +177,18 @@ def init_app(app):
         idPedido = '665da76dc2a7a806ff3e0bb0'
         pedido = Pedido.selectPedido(idPedido)
         return render_template('pagamento.html', titulo='Pagamento', pedido=pedido)
-
+    
+    @app.route('/vendedor/<id>/pagamento/<idPedido>/pix', methods=['GET', 'POST'])
+    def pix(id=None, idPedido=None):
+        vendedor = Usuario.trazerDados(id)
+        pedido = Pedido.selectPedido(idPedido)
+        return render_template('pix.html', vendedor=vendedor, pedido=pedido)
+    
+    @app.route('/finalizado/<idPedido>/<forma>', methods=['GET', 'POST'])
+    def atualizarPagamento(id=None, idPedido=None, forma=None):
+        pedido = Pedido.updatePedidoforma(id=idPedido, status='Pendente', forma=forma)
+        return render_template('finalizado.html')
+    
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
         vendedor = Usuario.trazerDados(session['user_id'])

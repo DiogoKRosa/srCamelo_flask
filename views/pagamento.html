@@ -28,7 +28,7 @@
                         <img src="{{url_for('static', filename='/images/cartao_verde.svg')}}" alt="">
                         Crédito
                     </div>
-                    <div class="opcao">
+                    <div class="opcao" onclick="location.href='{{url_for('pix', id=pedido['id_vendedor'], idPedido=pedido['_id'])}}'">
                         <img src="{{url_for('static', filename='/images/pix_verde.svg')}}" alt="">
                         Pix
                     </div>
