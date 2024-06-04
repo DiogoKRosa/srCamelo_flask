@@ -200,6 +200,11 @@ def init_app(app):
         pedidos = Pedido.selectCompras(session['user_id'])
         return render_template('compras.html', titulo ='Pedidos', pedidos=pedidos)
 
+    @app.route('/cliente/attpedido/<pedido>/<status>', methods=['GET', 'POST'])
+    def att_compra(pedido=None, status=None):
+        Pedido.updatePedidostatus(pedido, status)
+        return redirect(url_for('compras'))
+        
     @app.route('/inicio/vendedor')
     def inicio_vendedor():
         vendedor = Usuario.trazerDados(session['user_id'])
@@ -218,7 +223,7 @@ def init_app(app):
         return render_template('vendas.html', titulo='Vendas', pedidos=pedidos)
 
     @app.route('/vendedor/attpedido/<pedido>/<status>', methods=['GET', 'POST'])
-    def att_pedido(pedido=None, status=None):
+    def att_venda(pedido=None, status=None):
         Pedido.updatePedidostatus(pedido, status)
         return redirect(url_for('vendas'))
     

@@ -8,7 +8,8 @@
                 <div class="escondido">
                     <div class="texto-esquerda">
                         <div>
-                            <div style="font-size: 14px;">Id:{{pedido['id']}}</div> <div {% if pedido['status'] == 'Pendente' %} style="color:#FF6700 ;" {%endif%}>{{pedido['status']}}</div>
+                            <div style="font-size: 14px;">Id:{{pedido['id']}}</div> 
+                            <div {% if pedido['status'] == 'Pendente' %} style="color:#FF6700 ;" {%endif%}>{{pedido['status']}}</div>
                         </div>
                         <div>Cliente: {{pedido['cliente']}}</div>
                         <div>Tel: {{pedido['cliente_telefone']}}</div>
@@ -28,8 +29,8 @@
                             {% endfor %}
                         </div>
                         {% if pedido['status'] == 'Pendente' %}
-                        <button type="button" class="btn-pedido" style="margin-bottom: 10px;" onclick="location.href = '{{url_for('att_pedido', pedido=pedido['_id'],status='Entregue')}}'">Entregar</button>
-                        <button type="button" class="btn-pedido" onclick="location.href = '{{url_for('att_pedido', pedido = pedido['_id'], status='Cancelado')}}'">Cancelar</button>
+                        <button type="button" class="btn-pedido" style="margin-bottom: 10px;" onclick="location.href = '{{url_for('att_venda', pedido=pedido['_id'],status='Entregue')}}'">Entregar</button>
+                        <button type="button" class="btn-pedido" onclick="location.href = '{{url_for('att_venda', pedido = pedido['_id'], status='Cancelado')}}'">Cancelar</button>
                         {% endif %}
                     </div>
                 </div>
