@@ -310,4 +310,4 @@ def init_app(app):
                 Produto.delete(x, session['user_id'])
             return redirect(url_for('inicio_vendedor'))
         
-        return render_template('produtos.html', produtos=produtos, categorias=categorias, Pid=Pid, tipo='vendedor')
+        return render_template('produtos.html', produtos=produtos, categorias=categorias, Pid=Pid, tipo='vendedor', titulo='Produtos')
