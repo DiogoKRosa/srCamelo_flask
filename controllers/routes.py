@@ -34,19 +34,19 @@ def init_app(app):
                 session['nome'] = user['nome']
                 session['telefone'] = user['telefone']
                 if(user['tipo'] == 'Cliente'):
-                    print('inicio_cliente')
+                    #print('inicio_cliente')
                     return redirect(url_for('inicio_cliente'))
                 elif(user['tipo'] == 'Vendedor'):
                     prod = Produto.selectByVendedor(session['user_id'])
                     count = 0
                     for produto in prod:
                         count = count + 1
-                    print(count)
+                    #print(count)
                     if count>0:
-                        print('inicio_vendedor')
+                        #print('inicio_vendedor')
                         return redirect(url_for('inicio_vendedor'))
                     else:
-                        print('primeiro_acesso')
+                        #print('primeiro_acesso')
                         return redirect(url_for('primeiro_acesso'))
                         
             else:
@@ -133,7 +133,7 @@ def init_app(app):
         #print(vendedor)
         produtos = Produto.selectByVendedor(id)
         #print(produtos)
-        return render_template('pagina_vendedor.html',  titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos)
+        return render_template('pagina_vendedor.html',  titulo=vendedor['nome'], vendedor=vendedor, produtos=produtos, tipo='cliente')
     
     @app.route('/vendedor/<id>/pedido', methods=['GET', 'POST'])
     def pedido(id=None):
@@ -198,7 +198,7 @@ def init_app(app):
     @app.route('/compras', methods=['GET', 'POST'])
     def compras():
         pedidos = Pedido.selectCompras(session['user_id'])
-        return render_template('compras.html', titulo ='Pedidos', pedidos=pedidos)
+        return render_template('compras.html', titulo ='Pedidos', pedidos=pedidos, tipo='cliente')
 
     @app.route('/cliente/attpedido/<pedido>/<status>', methods=['GET', 'POST'])
     def att_compra(pedido=None, status=None):
@@ -215,12 +215,12 @@ def init_app(app):
     
     @app.route('/dados/vendedor')
     def dados_vendedor():
-        return render_template('dados_vendedor.html')
+        return render_template('dados_vendedor.html', tipo='vendedor')
 
     @app.route('/vendas')
     def vendas():
         pedidos = Pedido.selectVendas(session['user_id'])
-        return render_template('vendas.html', titulo='Vendas', pedidos=pedidos)
+        return render_template('vendas.html', titulo='Vendas', pedidos=pedidos, tipo='vendedor')
 
     @app.route('/vendedor/attpedido/<pedido>/<status>', methods=['GET', 'POST'])
     def att_venda(pedido=None, status=None):
@@ -310,4 +310,4 @@ def init_app(app):
                 Produto.delete(x, session['user_id'])
             return redirect(url_for('inicio_vendedor'))
         
-        return render_template('produtos.html', produtos=produtos, categorias=categorias, Pid=Pid)
+        return render_template('produtos.html', produtos=produtos, categorias=categorias, Pid=Pid, tipo='vendedor')
