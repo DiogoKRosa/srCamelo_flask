@@ -16,7 +16,7 @@
                         {% if tipo == 'cliente' %}
                             location.href='{{url_for('inicio_cliente')}}'
                         {% elif tipo == 'vendedor' %}
-                            location.href == '{{url_for('inicio_vendedor')}}'
+                            location.href = '{{url_for('inicio_vendedor')}}'
                         {% else %}
                             window.history.back()
                         {% endif %}
