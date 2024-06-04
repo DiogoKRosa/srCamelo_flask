@@ -217,6 +217,11 @@ def init_app(app):
         pedidos = Pedido.selectVendas(session['user_id'])
         return render_template('vendas.html', titulo='Vendas', pedidos=pedidos)
 
+    @app.route('/vendedor/attpedido/<pedido>/<status>', methods=['GET', 'POST'])
+    def att_pedido(pedido=None, status=None):
+        Pedido.updatePedidostatus(pedido, status)
+        return redirect(url_for('vendas'))
+    
     @app.route('/primeiro-acesso', methods=['GET', 'POST'])
     def primeiro_acesso():
         if request.method == 'POST':

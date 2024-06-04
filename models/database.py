@@ -168,6 +168,11 @@ class Pedido():
                           'forma_pagamento': forma}}
         mongo.db.pedidos.update_one(filtro, update)
     
+    def updatePedidostatus(id, status):
+        filtro = {"_id": ObjectId(id)}
+        update = {'$set': {'status': status}}
+        mongo.db.pedidos.update_one(filtro, update)
+
     @staticmethod
     def selectCompras(id):
         return mongo.db.pedidos.find({'id_cliente':id})

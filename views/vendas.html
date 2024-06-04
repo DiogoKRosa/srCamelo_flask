@@ -8,15 +8,15 @@
                 <div class="escondido">
                     <div class="texto-esquerda">
                         <div>
-                            <div style="font-size: 14px;">Id:{{pedido['id']}}</div> <div style="color:#FF6700 ;">{{pedido['status']}}</div>
+                            <div style="font-size: 14px;">Id:{{pedido['id']}}</div> <div {% if pedido['status'] == 'Pendente' %} style="color:#FF6700 ;" {%endif%}>{{pedido['status']}}</div>
                         </div>
-                        <div>Vendedor: {{pedido['cliente']}}</div>
+                        <div>Cliente: {{pedido['cliente']}}</div>
                         <div>Tel: {{pedido['cliente_telefone']}}</div>
                     </div>
                     <div class="texto-direita">
                         <div>{{pedido['data']}}</div>
                         <div>Total: R$ {{pedido['total']}}</div>
-                        <div style="color: #5CAC0E;" onclick="expandir({{pedido['id']}})">Detalhes ></div>
+                        <div style="color: #5CAC0E; cursor: pointer;" onclick="expandir({{pedido['id']}})">Detalhes ></div>
                     </div>
                 </div>
                 <div class="expandido" id="expandido-{{pedido['id']}}" style="display: none; padding-bottom: 20px;">
@@ -27,8 +27,10 @@
                             <p>{{produto['nome']}} - {{produto['qtde']}} un - R${{produto['preco']}}</p>
                             {% endfor %}
                         </div>
-                        <button type="button" class="btn-pedido">Entregar</button>
-                        <button type="button" class="btn-pedido">Cancelar</button>
+                        {% if pedido['status'] == 'Pendente' %}
+                        <button type="button" class="btn-pedido" style="margin-bottom: 10px;" onclick="location.href = '{{url_for('att_pedido', pedido=pedido['_id'],status='Entregue')}}'">Entregar</button>
+                        <button type="button" class="btn-pedido" onclick="location.href = '{{url_for('att_pedido', pedido = pedido['_id'], status='Cancelado')}}'">Cancelar</button>
+                        {% endif %}
                     </div>
                 </div>
             </div>
