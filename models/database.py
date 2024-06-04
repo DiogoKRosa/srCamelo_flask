@@ -175,8 +175,8 @@ class Pedido():
 
     @staticmethod
     def selectCompras(id):
-        return mongo.db.pedidos.find({'id_cliente':id})
+        return mongo.db.pedidos.find({'id_cliente':id, 'status':{'$ne': "Realizando"}}).sort("id", -1)
     
     @staticmethod
     def selectVendas(id):
-        return mongo.db.pedidos.find({'id_vendedor':id})
+        return mongo.db.pedidos.find({'id_vendedor':id, 'status':{'$ne':"Realizando"}}).sort("id", -1)
