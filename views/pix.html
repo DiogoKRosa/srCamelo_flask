@@ -3,10 +3,10 @@
 <div class="content">
     <div class="centralizar">
         <h3>Forma de Pagamento</h3>
-        <p>Total: R$ 15,00</p>
+        <p>Total: R$ {{pedido['total']}}</p>
         <img src="/static/images/pix-pagamento.png" style="margin-top: 30px;">
         <img src="/static/images/qr-code.png" style="margin-top: 58px; margin-bottom: 34px;">
-        <p style="color: #5CAC0E;">Chave Pix: (00) 00000-0000</p>
+        <p style="color: #5CAC0E;">Chave Pix: {{vendedor['telefone']}}</p>
         <button type="button" style="margin-top: 100px;" onclick="location.href='{{url_for('atualizarPagamento', idPedido=pedido['_id'], forma='pix')}}'">Finalizar Pedido</button>
     </div>
 </div>
